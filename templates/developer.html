@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer</title>
+    {% include 'common/mylinks.html' %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #212529; /* A dark gray from Bootstrap's theme */
+            color: #f8f9fa; /* A light gray/white from Bootstrap */
+        }
+
+        /* Set section padding and smooth scroll behavior */
+        html {
+            scroll-padding-top: 70px;
+            scroll-behavior: smooth;
+        }
+
+        /* Project card hover effect */
+        .card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Simple fade-in animation for sections */
+        .section-fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .section-fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .btn-cyan {
+            background-color: #0dcaf0;
+            border-color: #0dcaf0;
+            color: #fff;
+        }
+        .btn-cyan:hover {
+            background-color: #0b9cae;
+            border-color: #0a8a9c;
+        }
+
+        .text-cyan {
+            color: #0dcaf0 !important;
+        }
+        .err{
+            color: red;
+            display: block;
+        }
+        input,textarea{
+            width: 100%;
+            margin: 8px 0px;
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" >
+    <div class="container-fluid">
+        <div class="row main" style="min-height: 600px; background-color: #433f3f;">
+            <div class="col-sm-12" style="padding: 0px; margin: 0px;">
+                <!-- Header & Navigation Bar -->
+                <nav id="navbar-main" class="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <div class="container-fluid">
+                        <a class="navbar-brand fw-bold fs-4" href="#about">Shivam</a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav ms-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#about">About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#projects">Projects</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#contact">Contact</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{url_for('index')}}">Home</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <!-- Header & Navigation Bar End -->
+                <main class="container mt-5">
+                    <!-- Hero Section -->
+                    <section id="home" class="d-flex flex-column justify-content-center align-items-center text-center min-vh-100">
+                        <div class="my-5">
+                            <h1 class="display-2 fw-bold text-white mb-3">Creative Developer & Designer</h1>
+                            <p class="lead text-white-50 mb-4">I build beautiful, responsive, and user-friendly web applications.</p>
+                            <a href="#projects" class="btn btn-cyan btn-lg rounded-pill px-4">
+                                View My Work
+                            </a>
+                        </div>
+                    </section>
+
+                    <!-- About Section -->
+                    <section id="about" class="py-5 section-fade-in">
+                        <h2 class="display-5 fw-bold text-center text-white mb-5">About Me</h2>
+                        <div class="row align-items-center">
+                            <div class="col-lg-4 text-center mb-4 mb-lg-0">
+                                <img src="{{url_for('static',filename='images/shivam.jpg')}}" alt="Portrait of Shivam Kumar" class="img img-fluid rounded-circle shadow-lg" style="width: 300px; height: 300px; object-fit: cover;">
+                            </div>
+                            <div class="col-lg-8">
+                                <p class="text-white-50 fs-5">
+                                    Hello! I'm Shivam, a passionate Web Developer with a love for creating elegant and efficient solutions to complex problems.
+                                </p>
+                                <p class="text-white-50 fs-5 mb-4">
+                                    My expertise in JavaScript, JQuery, ReactJS and everything in between.
+                                </p>
+                                <div>
+                                    <span class="badge bg-secondary p-2 m-1">JavaScript</span>
+                                    <span class="badge bg-secondary p-2 m-1">ReactJS</span>
+                                    <span class="badge bg-secondary p-2 m-1">Bootstrap 5</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Projects Section -->
+                    <section id="projects" class="py-5 section-fade-in">
+                        <h2 class="display-5 fw-bold text-center text-white mb-5">My Projects</h2>
+                        <div class="row g-4">
+                            
+                            <!-- Project Card 1 -->
+                            <div class="col-sm-6 col-lg-4">
+                                <div class="card bg-dark text-white h-100 border-secondary">
+                                    <img src="{{url_for('static',filename='images/chatbot.png')}}" class="card-img-top" alt="Project 1 Screenshot">
+                                    <div class="card-body">
+                                        <h5 class="card-title fw-bold">ChatBot</h5>
+                                        <p class="card-text text-white-50">
+                                            A simple chatbot project for college queries.
+                                        </p>
+                                        <a href="{{url_for('open_chat')}}" class="btn btn-outline-info">View Demo &rarr;</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Project Card 2 -->
+                            <div class="col-sm-6 col-lg-4">
+                                <div class="card bg-dark text-white h-100 border-secondary">
+                                    <img src="{{url_for('static',filename='images/ComingSoon.png')}}" class="card-img-top" alt="ComingSoon" style="filter: blur(2px);">
+                                    <div class="card-body">
+                                        <h5 class="card-title fw-bold">PROJECT_NAME IS COMING SOON.</h5>
+                                        <p class="card-text text-white-50">
+                                            We are currently in development, building something amazing for you. Stay tuned for the official launch!
+                                        </p>
+                                        <a href="#" class="btn btn-outline-info disabled">View Demo &rarr;</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Project Card 3 -->
+                            <div class="col-sm-6 col-lg-4">
+                                <div class="card bg-dark text-white h-100 border-secondary">
+                                    <img src="{{url_for('static',filename='images/ComingSoon.png')}}" class="card-img-top" alt="ComingSoon" style="filter: blur(2px);">
+                                    <div class="card-body">
+                                        <h5 class="card-title fw-bold">PROJECT_NAME IS COMING SOON.</h5>
+                                        <p class="card-text text-white-50">
+                                            We are currently in development, building something amazing for you. Stay tuned for the official launch!
+                                        </p>
+                                        <a href="#" class="btn btn-outline-info disabled">View Demo &rarr;</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </section>
+
+                    <!-- Contact Section -->
+                    <section id="contact" class="py-5 section-fade-in">
+                        <h2 class="display-5 fw-bold text-center text-white mb-3">Contact with me..</h2>
+                        <p class="text-center text-white-50 mb-5 mx-auto" style="max-width: 600px;">
+                            I'm currently open to new opportunities and collaborations. Feel free to send me a message.
+                        </p>
+                        <form class="mx-auto" style="max-width: 600px;" action="/submit_mail" method="post">
+                            <div class="form-floating mb-3">
+                                
+                                <input type="text" name="cname" class="form-control bg-dark text-white" id="coname" placeholder="Your Name">
+                                <label for="coname">Name</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="email" name="cemail" class="form-control bg-dark text-white" id="coemail" placeholder="name@example.com">
+                                <label for="coemail">Email address</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <textarea class="form-control bg-dark text-white" name="cmessage" rows="5" placeholder="Leave a comment here" id="comessage" style="height: 100px; resize: none;"></textarea>
+                                <label for="comessage">Message</label>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" id="cobtnsave" class="btn btn-cyan btn-lg rounded-pill px-4">Send Message</button>
+                            </div>
+                        </form>
+                            {% if msg %}
+                                <script>
+                                    alert("{{ msg }}");
+                                    window.location.href = "/developer"; 
+                                </script>
+                            {% endif %}
+                    </section>
+                </main>
+            </div>
+        </div>
+        <div class="row footer-bottom text-center text-white pt-3" style="background-color: black; min-height: 50px;">
+            <div class="col-sm-6" style="font-size: 20px;">&copy; 2025 Shivam Kumar. All rights reserved.</div>
+            <div class="col-sm-6">
+                <a href="https://www.facebook.com/share/1CLLex9mfN/"><i class="bi icon text-center bi-facebook"></i></a>
+                <a href="https://x.com/shivams46739232?t=vZbBko6TEmTIBsCC8Po1Ww&s=09"><i class="bi icon text-center bi-twitter-x"></i></a>
+                <a href="https://www.instagram.com/shivamkumar.96?igsh=MXhkcWx3cjlvcmJqdg=="><i class="bi icon text-center bi-instagram"></i></a>
+                <a href="https://www.youtube.com/@story_wala_1432"><i class="bi icon text-center bi-youtube"></i></a>
+                <a href="https://github.com/shivamkumar969"><i class="bi icon text-center bi-github"></i></a>
+                <a href="https://www.linkedin.com/in/shivamkumar69"><i class="bi icon text-center bi-linkedin"></i></a>
+            </div>
+        </div>
+    </div>
+    <!-- Custom JS for animations -->
+    <script>
+        // JavaScript for section fade-in on scroll
+        const sections = document.querySelectorAll('.section-fade-in');
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Form Validation
+        $(document).ready(function(){
+            $('#cobtnsave').click(function(){
+                var status = true;
+                var name=$('#coname').val().trim();
+                var email=$('#coemail').val().trim();
+                var message=$('#comessage').val().trim();
+                // Remove old error messages
+                $('.err').remove();
+                // Validate Form Field
+                
+                // Validate Form Name
+                if(name.length==0){
+                    $("#coname").after("<span class='err'>Please enter your name.</span>");
+                    status=false;
+                }
+                else if(name.length<2){
+                    $("#coname").after("<span class='err'>Please enter your valid name.</span>");
+                    status=false;
+                }
+                // Validate Form Email
+                if(email.length==0){
+                    $("#coemail").after("<span class='err'>Please enter your email.</span>");
+                    status=false;
+                }
+                else if(!email.includes('@')){
+                    $("#coemail").after("<span class='err'>Please enter your valid email.</span>");
+                    status=false;
+                }
+                // Validate Form Message
+                if(message.length==0){
+                    $("#comessage").after("<span class='err'>Please enter your Feedback.</span>");
+                    status=false;
+                }
+                else{
+                    var wc=getWordCount(message);
+                    if(wc<9){
+                        $("#comessage").after("<span class='err'>Please enter your Feedback in detail</span>");
+                        status=false;
+                    }
+                }
+                return status;
+            });
+        });
+        function getWordCount(sent)
+        {
+            var x,wcount=0,ch;
+            for(x=0;x<sent.length;x++){
+                ch=sent.charAt(x);
+                if(ch==' '|| ch==',' || ch=='?' || ch==';' ||ch=='!' || ch=='.'){
+                    wcount++;
+                }
+            }
+            return wcount;
+        }
+    </script>
+    <style>
+    /* Initial style for ALL icons */
+    .icon {
+        font-size: 25px;
+        margin-left: 10px;
+        color: rgb(163, 162, 162); /* Initial color */
+        transition: color 0.3s, transform 0.3s; /* Smooth transition for hover */
+    }
+
+    /* The hover effect */
+    .icon:hover {
+        color: white; /* Color on hover */
+        transform: scale(1.1); /* Slightly enlarge the icon on hover */
+        cursor: pointer;
+    }
+</style>
+</body>
+</html>

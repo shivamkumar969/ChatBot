@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    {% include 'common/mylinks.html' %}
+
+</head>
+<body>
+    <div class="container-fluid" style="background-color: #fff9f7;">
+        {% include 'common/header.html' %}
+        <!-- Start Slider -->
+        <div class="row main" style="min-height: auto; background-color: #f9ebea;">
+            <div class="col-sm-12" style="min-height:auto; margin: 0px; padding: 0px;">
+                <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active" data-bs-interval="3000">
+                    <img src="{{url_for('static',filename='images/hcard1.png')}}" class="d-block w-100" alt="" style="filter: blur(5px);">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h1 class="text-white">AMONG TOP 50-B SCHOOL IN INDIA</h1>
+                        <p class="h4 text-white">Maintaing it upwards spree, the School of Management Sciences(SMS), Varanasi has earned 45th rank in the latest B-School survey conducted Busoness India</p>
+                    </div>
+                    </div>
+                    <div class="carousel-item" data-bs-interval="3000">
+                    <img src="{{url_for('static',filename='images/hcard2.png')}}" class="d-block w-100" alt="" style="filter: blur(5px);">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h1 class="text-white">LEARNING MAKE US STRONG FOR LIFE</h1>
+                        <p class="h4 text-white">We could bring all of the great opportunities that our student have... or you could hear it from the students Memselves</p>
+                    </div>
+                    </div>
+                    <div class="carousel-item" data-bs-interval="3000">
+                    <img src="{{url_for('static',filename='images/hcard3.png')}}" class="d-block w-100" alt="" style="filter: blur(5px);">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h1 class="text-white">THE GENERATION OF LEADERSHIP STARTS HERE</h1>
+                        <p class="h4 text-white">An investment in knowledge always pays the best interest</p>
+                    </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+                </div>               
+            </div>
+        </div>
+        <!-- End Slider -->
+         <!-- Stard Our Vision & Mission -->
+        <div class="row mt-3 mb-3">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10">
+                <div class="card mb-3" style="min-height: 200px;">
+                    <div class="row m-0 p-0" >
+                        <div class="col-md-4 m-0 p-0">
+                            <img src="{{url_for('static',filename='images/vision1.png')}}" class="img-fluid rounded-start" alt="" style="height: 200px; width: 100%; margin: 0px; padding: 0px;">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title h1" style="text-decoration: underline;">Our Vision</h5>
+                                <p class="card-text">
+                                    The SMS Varanasi strives to be among leading educational amtutions of the Country by comsatently engaging in it's endeavor through quality watching an innovation rooted in the indian Value System, and working towards buông an intelectual anfrastructure that serves the Country, its society and humanity.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+                <div class="card mb-3" style="min-height: 200px;">
+                    <div class="row g-0">
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title h1" style="text-decoration: underline;">Our Mission</h5>
+                                <p class="card-text">
+                                    To deliver student centric research-based education with emphasis on innovation to unlock opportunities by building trusted partnerships with stakeholders, to integrate policy with practice and to enable young minds to embark upon the journey of intellectual, social and spiritual transformation.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <img src="{{url_for('static',filename='images/mission.png')}}" class="img-fluid rounded-start" alt=""  style="min-height: 200px;">
+                        </div>
+                    </div>
+                </div>              
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+        <!-- End Our Vision & Missiion -->
+         <!-- Start Bubble Card -->
+        <div class="row mb-5 mt-5">
+            <div class="col-sm-1"></div>
+                <div class="col-sm-10">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="shadow shadow-sm bg-body p-1" style="min-height:300px; width: 400px; border-radius: 50px;">
+                                <div class="card-body"  >
+                                    <!-- <i class="bi bi-bullseye" style="font-size: 45px; color: red;"></i> -->
+                                    <i class="fa-solid fa-bullseye fa-fade" style="font-size: 45px; color: red;"></i>
+                                    <h4>Strong Academic reputation</h4>
+                                    <span class="h5">Accredited Excellence: <span class="h6">NAAC A++ and ABET-accredited programs ensure global recognition.</span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="shadow shadow-lg bg-body p-1" style="min-height:300px; width: 400px; border-radius: 50px;">
+                                <div class="card-body"  >
+                                    <!-- <i class="bi bi-bullseye" style="font-size: 45px; color: red;"></i> -->
+                                    <!-- <i fa-solid fa-briefcase fa-bounce style="color: #d0640b; font-size: 45px;"></i> -->
+                                    <i class="fa-solid fa-briefcase fa-bounce" style="color: #d0640b; font-size: 45px;"></i>
+                                    <h4>Impressive Placement Record</h4>
+                                    <span class="h5">Top Recruiters: <span class="h6">MicroSoft, Amazon, Google, TCS, Infosys and more..</span></span><br>
+                                    <span class="h5">Placement Training: <span class="h6">Regular soft skills, aptitude, and technical training sessions.</span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="shadow shadow-sm bg-body p-1" style="min-height:300px; width: 400px; border-radius: 50px;">
+                                <div class="card-body"  >
+                                    <!-- <i class="bi bi-bullseye" style="font-size: 45px; color: red;"></i> -->
+                                    <i class="fa-solid fa-earth-africa fa-beat-fade" style="color: #75c3ea; font-size: 45px;"></i>
+                                    <h4>Global Exposure</h4>
+                                    <span class="h5">International Tie-Ups: <span class="h6">MicroSoft, Amazon, Google, TCS, Infosys and more..</span></span><br>
+                                    <span class="h5">Student Exchange Programs: <span class="h6">Regular soft skills, aptitude, and technical training sessions.</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                
+                </div>
+            <div class="col-sm-1"></div>
+        </div>
+        <div class="row mb-5">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="shadow shadow-lg bg-body p-1 pt-3" style="min-height:300px; width: 400px; border-radius: 50px;">
+                            <div class="card-body"  >
+                                <!-- <i class="bi bi-bullseye" style="font-size: 45px; color: red;"></i> -->
+                                <i class="fa-solid fa-vial fa-beat-fade fa-xs" style="color: #567b70; font-size: 45px;"></i>
+                                <h4>Research & Innovation</h4>
+                                <span class="h5">Cutting-Edge Labs: <span class="h6">Modern research centers in AI, Robotics, Biotechnology, Nanotechnology, etc.</span></span><br>
+                                <span class="h5">Funding & Patents: <span class="h6">Encourages students to fill patents and participate in funded research projects.</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="shadow shadow-sm bg-body p-1" style="min-height:300px; width: 400px; border-radius: 50px;">
+                            <div class="card-body"  >
+                                <!-- <i class="bi bi-bullseye" style="font-size: 45px; color: red;"></i> -->
+                                <i class="fa-solid fa-city fa-fade" style="color: #b3c5e5; font-size: 45px;"></i>
+                                <h4>State-of-the-Art Infrastructure</h4>
+                                <span class="h5">Modern Campus: <span class="h6">Smart classrooms, high-tech labs, libraries, sports facilities, and auditoriurms.</span></span><br>
+                                <span class="h5">Hostel Facilities: <span class="h6">Spacious AC/non-AC hostels with Wi-Fi, gyms, and recreation areas.</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="shadow shadow-lg bg-body p-1" style="min-height:300px; width: 400px; border-radius: 50px;">
+                            <div class="card-body"  >
+                                <!-- <i class="bi bi-bullseye" style="font-size: 45px; color: red;"></i> -->
+                                <i class="fa-solid fa-star fa-beat-fade" style="color: #de7717; font-size: 45px;"></i>
+                                
+                                <h4>Vibrant Campus Life</h4>
+                                <span class="h5">Fests & Events: <span class="h6">MicroSoft, Amazon, Google, TCS, Infosys and more..</span></span><br>
+                                <span class="h5">Diverse Student Community: <span class="h6">Regular soft skills, aptitude, and technical training sessions.</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+        <!-- End Bubble Card -->
+        {% include 'common/footer.html' %}
+        {% include 'common/chatpopup.html' %}
+    </div>
+</body>
+</html>

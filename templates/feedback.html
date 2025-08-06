@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback</title>
+    {% include 'common/mylinks.html' %}
+</head>
+<style>
+    .err{
+        color: red;
+        display: block;
+    }
+    input,textarea{
+        width: 100%;
+        margin: 8px 0px;
+    }
+</style>
+<body>
+    <div class="container-fluid" style="background-color: #fff9f7;">
+        {% include 'common/header.html' %}
+        <div class="row main" style="min-height: 600px;">
+            <div class="col-sm-3 mt-3"></div>
+            <div class="col-sm-6 mt-3" style="min-height: 600px;">
+                <h1 class="text-center" style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; color: rgb(59, 59, 53);" >Feedback</h1>
+                <form action="/submit_feedback" method="post">
+                    <!-- <ol type="1">
+                        <li><p class="fw-bold m-1" id="que1">How satisfied are you with your college enviroment?</p></li>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="que1" id="StrongAgree1">
+                            <label class="form-check-label" for="StrongAgree1">
+                                Strong Agree
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="que1" id="Agree1">
+                            <label class="form-check-label" for="Agree1">
+                                Agree
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="que1" id="NotSure1">
+                            <label class="form-check-label" for="NotSure1">
+                                Not Sure
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="que1" id="Disagree1">
+                            <label class="form-check-label" for="Disagree1">
+                                Disagree
+                            </label>
+                        </div>
+
+                        <li><p class="fw-bold m-1" id="que2">Are classroom facilities and cleanliness maintained properly?</p></li>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="que2" id="StrongAgree2">
+                            <label class="form-check-label" for="StrongAgree2">
+                                Strong Agree
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="que2" id="Agree2">
+                            <label class="form-check-label" for="Agree2">
+                                Agree
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="que2" id="NotSure2">
+                            <label class="form-check-label" for="NotSure2">
+                                Not Sure
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="que2" id="Disagree2">
+                            <label class="form-check-label" for="Disagree2">
+                                Disagree
+                            </label>
+                        </div>
+
+                        <li><p class="fw-bold m-1" id="que3">Do you feel safe and supported on campus?</p></li>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="que3" id="StrongAgree3">
+                            <label class="form-check-label" for="StrongAgree3">
+                                Strong Agree
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="que3" id="Agree3">
+                            <label class="form-check-label" for="Agree3">
+                                Agree
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="que3" id="NotSure3">
+                            <label class="form-check-label" for="NotSure3">
+                                Not Sure
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="que3" id="Disagree3">
+                            <label class="form-check-label" for="Disagree3">
+                                Disagree
+                            </label>
+                        </div>
+
+                        <li><p class="fw-bold m-1" id="que4">Are classes held regularly and on time?</p></li>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="que4" id="StrongAgree4">
+                            <label class="form-check-label" for="StrongAgree4">
+                                Strong Agree
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="que4" id="Agree4">
+                            <label class="form-check-label" for="Agree4">
+                                Agree
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="que4" id="NotSure4">
+                            <label class="form-check-label" for="NotSure4">
+                                Not Sure
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="que4" id="Disagree4">
+                            <label class="form-check-label" for="Disagree4">
+                                Disagree
+                            </label>
+                        </div>
+
+                        <li><p class="fw-bold m-1" id="que5">Are library abd lab resources useful and accessile?</p></li>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="que5" id="StrongAgree5">
+                            <label class="form-check-label" for="StrongAgree5">
+                                Strong Agree
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="que5" id="Agree5">
+                            <label class="form-check-label" for="Agree5">
+                                Agree
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="que5" id="NotSure5">
+                            <label class="form-check-label" for="NotSure5">
+                                Not Sure
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="que5" id="Disagree5">
+                            <label class="form-check-label" for="Disagree5">
+                                Disagree
+                            </label>
+                        </div>
+
+                        <li>
+                            <p class="fw-bold m-1" id="que6">How would you rate your overall experience with college faculty in terms of punctuality, teaching clarity, doubt-solving, behavior, and guidance beyond class?</p>
+                        </li>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="que6" id="StrongAgree6">
+                            <label class="form-check-label" for="StrongAgree6">
+                                Strong Agree
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="que6" id="Agree6">
+                            <label class="form-check-label" for="Agree6">
+                                Agree
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="que6" id="NotSure6">
+                            <label class="form-check-label" for="NotSure6">
+                                Not Sure
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="que6" id="Disagree6">
+                            <label class="form-check-label" for="Disagree6">
+                                Disagree
+                            </label>
+                        </div>
+                    </ol> -->
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" name="fename" id="fname" placeholder="Enter Your Full Name">
+                        <label for="fname">Enter Your Full Name</label>
+                    </div>
+                    <select class="form-select mb-3" name="fegender" id="fgender" aria-label="Default select example">
+                        <option selected>Choose Your Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" name="feemail" id="femail" placeholder="name@example.com">
+                        <label for="femail">Email address</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <textarea class="form-control" placeholder="Leave a comment here" name="fesuggestion" id="fsuggestion" style="height: 100px; resize: none;"></textarea>
+                        <label for="fsuggestion">Suggestions(if any)</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <textarea class="form-control" placeholder="Leave a comment here" name="fefeedback" id="ffeedback" style="height: 100px; resize: none;"></textarea>
+                        <label for="ffeedback">Feedback Message</label>
+                    </div>
+                    <div class="d-grid gap-2 mb-3">
+                        <button class="btn btn-outline-secondary btn-info" id="fbtnsave" type="submit" style="font-size: 25px;">Save</button>
+                    </div>
+                </form>
+                {% if msgg %}
+                    <script>
+                        alert("{{ msgg }}");
+                        window.location.href = "{{url_for('index')}}"; 
+                    </script>
+                {% endif %}
+            </div>
+            <div class="col-sm-3 mt-3"></div>
+        </div>
+        {% include 'common/chatpopup.html' %}
+        {% include 'common/footer.html' %}
+        
+    </div>
+    <script>
+        // Form Validation
+        $(document).ready(function(){
+            $('#fbtnsave').click(function(){
+                var status = true;
+                var fname=$('#fname').val().trim();
+                var fgender=$('#fgender').val();
+                var femail=$('#femail').val().trim();
+                var fcourse=$('#fcourse').val();
+                var fsuggestion=$('#fsuggestion').val().trim();
+                var ffeedback=$('#ffeedback').val().trim();
+                // Remove old error messages
+                $('.err').remove();
+                // Validate Form Field
+                // Validate Form Name
+                if(fname.length==0){
+                    $("#fname").after("<span class='err'>Please enter your name.</span>");
+                    status=false;
+                }
+                else if(fname.length<2){
+                    $("#fname").after("<span class='err'>Please enter your valid name.</span>");
+                    status=false;
+                }
+                // Validate Form Gender
+                if(fgender=="Choose Your Gender"){
+                    $("#fgender").after("<span class='err'>Please select your gender.</span>");
+                    status=false;
+                }
+                // Validate Form Email
+                if(femail.length==0){
+                    $("#femail").after("<span class='err'>Please enter your email.</span>");
+                    status=false;
+                }
+                else if(!femail.includes('@')){
+                    $("#femail").after("<span class='err'>Please enter your valid email.</span>");
+                    status=false;
+                }
+                // Validate Form Course
+                if(fcourse=="Choose Your Course"){
+                    $("#fcourse").after("<span class='err'>Please select your course.</span>");
+                    status=false;
+                } 
+                // Validate Form Suggestions
+                if(fsuggestion.length==0){
+                    $("#fsuggestion").after("<span class='err'>Please enter your Suggestions.</span>");
+                    status=false;
+                }
+                else{
+                    var wc=getWordCount(fsuggestion);
+                    if(wc<9){
+                        $("#fsuggestion").after("<span class='err'>Please enter your Suggestions in detail</span>");
+                        status=false;
+                    }
+                }
+                // Validate Form Feedback
+                if(ffeedback.length==0){
+                    $("#ffeedback").after("<span class='err'>Please enter your Feedback.</span>");
+                    status=false;
+                }
+                else{
+                    var wc=getWordCount(ffeedback);
+                    if(wc<9){
+                        $("#ffeedback").after("<span class='err'>Please enter your Feedback in detail</span>");
+                        status=false;
+                    }
+                }
+                // Validation for radio buttons
+                // // Question 1
+                // if($('#StrongAgree1').prop('checked')==false && $('#Agree1').prop('checked')==false && $('#NotSure1').prop('checked')==false && $('#Disagree1').prop('checked')==false){
+                //     $('#que1').after("<span class='err'>Please select your answer.</span>");
+                //     status=false;
+                // }
+                // // Question 2
+                // if($('#StrongAgree2').prop('checked')==false && $('#Agree2').prop('checked')==false && $('#NotSure2').prop('checked')==false && $('#Disagree2').prop('checked')==false){
+                //     $('#que2').after("<span class='err'>Please select your answer.</span>");
+                //     status=false;
+                // }
+                // // Question 3
+                // if($('#StrongAgree3').prop('checked')==false && $('#Agree3').prop('checked')==false && $('#NotSure3').prop('checked')==false && $('#Disagree3').prop('checked')==false){
+                //     $('#que3').after("<span class='err'>Please select your answer.</span>");
+                //     status=false;
+                // }
+                // // Question 4
+                // if($('#StrongAgree4').prop('checked')==false && $('#Agree4').prop('checked')==false && $('#NotSure4').prop('checked')==false && $('#Disagree4').prop('checked')==false){
+                //     $('#que4').after("<span class='err'>Please select your answer.</span>");
+                //     status=false;
+                // }
+                // // Question 5
+                // if($('#StrongAgree5').prop('checked')==false && $('#Agree5').prop('checked')==false && $('#NotSure5').prop('checked')==false && $('#Disagree5').prop('checked')==false){
+                //     $('#que5').after("<span class='err'>Please select your answer.</span>");
+                //     status=false;
+                // }
+                // // Question 6
+                // if($('#StrongAgree6').prop('checked')==false && $('#Agree6').prop('checked')==false && $('#NotSure6').prop('checked')==false && $('#Disagree6').prop('checked')==false){
+                //     $('#que6').after("<span class='err'>Please select your answer.</span>");
+                //     status=false;
+                // }
+                return status;
+            });
+        });
+        function getWordCount(sent)
+        {
+            var x,wcount=0,ch;
+            for(x=0;x<sent.length;x++){
+                ch=sent.charAt(x);
+                if(ch==' '|| ch==',' || ch=='?' || ch==';' ||ch=='!' || ch=='.'){
+                    wcount++;
+                }
+            }
+            return wcount;
+        }
+    </script>
+</body>
+</html>

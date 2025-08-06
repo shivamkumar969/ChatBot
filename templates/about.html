@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    {% include 'common/mylinks.html' %}
+</head>
+    <style>
+        /* Add a smooth transition effect to the images */
+        .img-thumbnail {
+            transition: color 0.3s, transform 0.3s;
+            filter: blur(2px);
+        }
+        /* Apply the zoom effect when hovering over the image */
+        .img-thumbnail:hover {
+            transform: scale(1.5);
+            cursor: pointer;
+            filter: blur(0px);
+            padding-top: 30px;
+        }
+        hr{
+            height: 2px;
+        }
+    </style>
+<body>
+    <div class="container-fluid" style="background-color: #fff9f7;">
+        {% include 'common/header.html' %}
+        <!--Start Introduction of Chatbot -->
+        <div class="row mt-3 mb-3" >
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10">
+                <div class="card mb-3 m-0 p-0">
+                    <div class="row m-0 p-0">
+                        <div class="col-md-4 m-0 p-0">
+                            <img src="{{url_for('static',filename='images/hcard1.png')}}" class="img-fluid rounded-start" alt=""style="margin: 0px; padding: 0px; height:100%; width:100%;">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title h3">Introduction</h5>
+                                <p class="card-text">This project aims to develop a simple web-based chatbot application using the Flask framework with AI & DS. The chatbot will serve as an interactive tool for new college students to get answers to common queries regarding college information, admissions, courses, facilities, etc. The primary goal is to provide instant and easily accessible information, reducing the burden on administrative staff and helping new students navigate their initial college experience smoothly. The chatbot will be designed with a user-friendly interface, allowing students to type their questions and receive relevant pre-defined responses.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="mt-3 mb-3"  style="padding-left: 40px; padding-right: 40px;font-weight: bolder;">
+                        The "Simple Chatbot for College Queries" is a an Al & DS based application that allows new or prospective students to interact with a virtual assistant (chatbot) and get answers to frequently asked questions related to the college.
+                    </span>
+                </div>
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+        <!--End Introduction of Chatbot -->
+        <!--Start Welcome to SMS Varanasi -->
+        <div class="row mt-3 mb-3" style="min-height: auto;">
+            <hr />
+            <span class="h1 text-center m-0" style="font-family: 'Intel One Mono', monospace; font-style: italic;">WELCOME TO SMS-VARANASI</span><hr class="hr"/>
+            <div class="col-sm-1 pt-3 pb-3"></div>
+            <div class="col-sm-3 p-5 text-right">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{url_for('static',filename='images/PNJha.jpg')}}" class="card-img-top" alt="">
+                        <div class="card-body">
+                        <h1 class="card-title">Director</h1>
+                        <p class="card-text">
+                            <h2>Prof.P.N.Jha</h2>
+                            <h4>MBA,PGDAM,Ph.D</h4>
+                            <h4>(Mgmt).D.Litt.(Mgmt.)</h4>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-7 pt-5 pb-3">
+                <span style="text-align: justify; font-weight: bold;">
+                    School of Management Sciences Varanasi, popularly known as SMS Varanasi, has been a pristine institution attracting hues of both a new age B-School as well as an archaic academic house. A 1995-born institution in the holy city of Varanasi (Kashi) witnessed an auspicious time, the childhood period of the opening economy, and received a thumping welcome by virtue of being the first of its kind of self-financed institution in the region. Nurtured and groomed under the ethical guidelines of Dr. Bhisma Narayan Singh and academic care of renowned professors in the relevant areas, SMS Varanasi could attain the grit to imbibe the core value of ‘Quality’ in the underpinnings of its very foundation in order to pioneer the spread of management and other professional education in accordance with the spirit of Higher Education in this part of the country. Housed in an arrogantly beautiful green campus, SMS Varanasi is a NAAC ‘A’ Grade Accredited Institution that further maintains a visible position in the high-profile bracket of ’Top 50 B-Schools in India’. Committed to nurture academic and intellectual strivings, vibrant co- & extra-curricular activities, outreach initiatives and civic engagements of a high order, the institution, as early as 2003, started a ‘Centre of Spiritualism and Human Enrichment’ with the blessings of Pt. Vishnu Kant Shashtri, the then Hon’ble Governor, UP, and subsequently emerged as a Global Leader in positioning Spiritual Wisdom in the managerial epistemology. Remarkably, four bi-annual research Journals – Management Insight, Purushartha, Computing Trendz, and SMS Journal of Entrepreneurship & Innovation, published by us, are being indexed in International Data-base, Scopus, Elsevier, apart from being listed in the UGC-approved List of journals. It goes without saying that any society is measured on the canon of its quality of manpower and institutes like SMS Varanasi have this onerous task of producing high quality manpower. Providing one of the best learning experience, coupled with a robust placement, SMS Varanasi today is considered to be one of the most sought-after colleges in this part of the country for pursuing Management, Computer Sciences, Commerce and Mass Communication programmes. Our educational programmes are of the highest standards, incorporating a pragmatic application, initiative, hard work, intellectual maturity and strength of purpose so as to equip the students for success in career and life as well. SMS Varanasi displays the adaptability to embrace the transition in management education in India and accordingly offers a reasonable space to experiential learning.
+                </span>
+            </div>
+            <div class="col-sm-1 pt-3 pb-3"></div>
+        </div>
+        <!--End Welcome to SMS Varanasi -->
+        <!--Start How Do you want to study -->
+        <div class="row">
+            <hr class="hr"/>
+            <span class="h1 text-center " style='font-family: "Dancing Script", cursive;'>HOW DO YOU WANT TO STUDY?</span><hr class="hr"/>
+            <div class="col-sm-1"></div>
+            <div class="col-sm-2 mt-4">
+                <div class="card-body">
+                    <img src="{{url_for('static',filename='images/BCA.jpg')}}" alt="" class="img-thumbnail">
+                    <p class="card-text">
+                        BCA<br>
+                        Duratioin: 3 year
+                    </p>
+                </div>
+            </div>   
+
+            <div class="col-sm-2 mt-4">
+                <div class="card-body">
+                    <img src="{{url_for('static',filename='images/BBA.jpg')}}" alt="" class="img-thumbnail">
+                    <p class="card-text">
+                        BBA<br>
+                        Duratioin: 3 year
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-sm-2 mt-4">
+                <div class="card-body">
+                    <img src="{{url_for('static',filename='images/MCA.jpg')}}" alt="" class="img-thumbnail">
+                    <p class="card-text">
+                        MCOM<br>
+                        Duratioin: 2 year
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-sm-2 mt-4">
+                <div class="card-body">
+                    <img src="{{url_for('static',filename='images/MCA.jpg')}}" alt="" class="img-thumbnail">
+                    <p class="card-text">
+                        MBA<br>
+                        Duratioin: 2 year
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-sm-2 mt-4">
+                <div class="card-body">
+                    <img src="{{url_for('static',filename='images/MCA.jpg')}}" alt="" class="img-thumbnail">
+                    <p class="card-text">
+                        MCA<br>
+                        Duratioin: 2 year
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-sm-1"></div>
+            
+        </div>
+        <!--End How Do you want to study -->
+        <hr/>
+        <!--Start News & Events -->
+        <div class="row">
+            <span class="h1 text-center " style='font-family: "Dancing Script", cursive; font-weight: 400;'>NEWS AND EVENTS</span><hr/>
+            <div class="col-sm-1"></div>
+
+            <div class="col-sm-2 mt-4">
+                <div class="card-body">
+                    <img src="{{url_for('static',filename='images/HRConclav.jpg')}}" alt="" class="img-thumbnail">
+                    <p class="card-text">
+                        HR Conclave
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-sm-2 mt-4">
+                <div class="card-body">
+                    <img src="{{url_for('static',filename='images/TechMarathon.jpg')}}" alt="" class="img-thumbnail">
+                    <p class="card-text">
+                        Tech Marathon
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-sm-3 mt-4" style="background-color: transparent;">
+                <div class="card-body">
+                    <img src="{{url_for('static',filename='images/AdharShila.jpg')}}" alt="" class="img-thumbnail">
+                    <p class="card-text">
+                        Adhar Shila
+                    </p>
+                </div>
+            </div>   
+
+            <div class="col-sm-3 mt-4">
+                <div class="card-body">
+                    <img src="{{url_for('static',filename='images/Sportfest.jpg')}}" alt="" class="img-thumbnail">
+                    <p class="card-text">
+                        Sportfest
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-sm-1"></div>
+            <hr/>
+        </div>
+        <!--End News & Events -->
+        <!--Start Our Recruiters -->
+        <div class="row">
+            <span class="text-center h1" style="font-family: 'Playwrite AU QLD', cursive">OUR TOP RECRUITERS</span><hr/>
+            <div class="col sm-1"></div>
+            <div class="col-sm-10">
+                <marquee behavior="scroll" direction="left" onmouseover="stop()" onmouseleave="start()">
+                   <img src="{{url_for('static',filename='images/wipro.png')}}" alt="vertical line" style="height: 50px;" width="100" height="50"/>
+                   &nbsp;&nbsp;
+                    <img src="{{url_for('static',filename='images/deloitte.png')}}" alt="vertical line" style="height: 50px;" width="100" height="50"/>
+                    &nbsp;&nbsp;
+                    <img src="{{url_for('static',filename='images/infosys.png')}}" alt="vertical line" style="height: 50px;" width="100" height="50"/>
+                    &nbsp;&nbsp;
+                    <img src="{{url_for('static',filename='images/accenture.png')}}" alt="vertical line" style="height: 50px;" width="100" height="50"/>
+                    &nbsp;&nbsp;
+                    <img src="{{url_for('static',filename='images/adobe.png')}}" alt="vertical line" style="height: 50px;" width="100" height="50"/>
+                     &nbsp;&nbsp;
+                    <img src="{{url_for('static',filename='images/chetu.png')}}" alt="vertical line" style="height: 50px;" width="100" height="50"/>
+                    &nbsp;&nbsp;
+                    <img src="{{url_for('static',filename='images/intel.png')}}" alt="vertical line" style="height: 50px;" width="100" height="50"/>
+                    &nbsp;&nbsp;
+                    <img src="{{url_for('static',filename='images/justdial.png')}}" alt="vertical line" style="height: 50px;" width="100" height="50"/>
+                    &nbsp;&nbsp;
+                    <img src="{{url_for('static',filename='images/mahindra.png')}}" alt="vertical line" style="height: 50px;" width="100" height="50"/>
+                    &nbsp;&nbsp;
+                    <img src="{{url_for('static',filename='images/tcs.png')}}" alt="vertical line" style="height: 50px;" width="100" height="50"/>
+                    &nbsp;&nbsp;
+                    <img src="{{url_for('static',filename='images/hcl.png')}}" alt="vertical line" style="height: 50px;" width="100" height="50"/>
+                    &nbsp;&nbsp;
+                    <img src="{{url_for('static',filename='images/capgemini.png')}}" alt="vertical line" style="height: 50px;" width="100" height="50"/>
+                    &nbsp;&nbsp;
+                    <img src="{{url_for('static',filename='images/cogizant.png')}}" alt="vertical line" style="height: 50px;" width="100" height="50"/>
+                </marquee>
+            </div>
+            <div class="col sm-1"></div>
+        </div>
+        <!--End Our Recuriters -->
+        {% include 'common/footer.html' %}
+        {% include 'common/chatpopup.html' %}
+    </div>
+</body>
+</html>

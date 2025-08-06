@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enquiry</title>
+    {% include 'common/mylinks.html' %}
+    <script>
+        // Jquery Ajax code to refresh captcha
+        $(document).ready(function(){
+            $("#refreshcode").click(function(){
+                // AJAX Call
+                $.get("getnew_captcha",null,function(data){
+                    $('#imgcaptcha').attr("src","/static/captcha_file/"+data)
+                });
+            });
+        });
+    </script>
+    <style>
+        .err{
+            color: red;
+            display: block;
+        }
+        input{
+            width: 100%;
+            margin: 8px 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid" style="background-color: #fff9f7;">
+        {% include 'common/header.html' %}
+        <div class="row main" style="min-height: 600px;">
+            <h1 class="text-center text-danger">Enquiry Form</h1>
+            <div class="col-sm-6 p-5 pt-2" style="min-height: 100px;">
+                <form action="/submit_enquery" method="post">
+                    <div class="form-floating mb-3">
+                        <input type="text" name="enname" class="form-control" id="ename" placeholder="Enter Your Full Name" pattern="^[A-Za-z\s]+$" title="Only letters and white spaces (2-50 characters)">
+                        <label for="ename">Enter Your Full Name</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="email" name="enemail" class="form-control" id="eemail" placeholder="name@example.com">
+                        <label for="eemail">Email address</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="number" name="enmobile" class="form-control" id="emobile" placeholder="Enter Your Mobile Number">
+                        <label for="emobile">Enter Mobile Number</label>
+                    </div>
+                    <div class="row form">
+                        <div class="col-sm-6 mb-3">
+                            <select class="form-select" id="estate" name="enstate" aria-label="State select">
+                                <option selected>Choose Your State</option>
+                                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                <option value="Assam">Assam</option>
+                                <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                                <option value="Chandigarh">Chandigarh</option>
+                                <option value="Bihar">Bihar</option>
+                                <option value="Chhattisgarh">Chhattisgarh</option>                                
+                                <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Goa">Goa</option>
+                                <option value="Gujarat">Gujarat</option>
+                                <option value="Haryana">Haryana</option>
+                                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                <option value="Jharkhand">Jharkhand</option>                                
+                                <option value="Kerala">Kerala</option>
+                                <option value="Karnataka">Karnataka</option>                                
+                                <option value="Ladakh">Ladakh</option>
+                                <option value="Lakshadweep">Lakshadweep</option>                                
+                                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                <option value="Maharashtra">Maharashtra</option>
+                                <option value="Manipur">Manipur</option>
+                                <option value="Meghalaya">Meghalaya</option>
+                                <option value="Mizoram">Mizoram</option>
+                                <option value="Nagaland">Nagaland</option>
+                                <option value="Odisha">Odisha</option>
+                                <option value="Puducherry">Puducherry</option>
+                                <option value="Punjab">Punjab</option>
+                                <option value="Rajasthan">Rajasthan</option>
+                                <option value="Sikkim">Sikkim</option>
+                                <option value="Tamil Nadu">Tamil Nadu</option>
+                                <option value="Telangana">Telangana</option>
+                                <option value="Tripura">Tripura</option>
+                                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                <option value="Uttarakhand">Uttarakhand</option>
+                                <option value="West Bengal">West Bengal</option>   
+                            </select>
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <select class="form-select" id="ecity" name="encity" aria-label="City select">
+                                <option selected>Choose Your City</option>
+                            </select>
+                        </div>
+                    </div>
+                    <select class="form-select mb-3" id="ecourse" name="encourse" aria-label="Course select">
+                        <option selected>Choose Your Course</option>
+                        <option value="BA (Mass Comm.)">BA (Mass Comm.)</option>
+                        <option value="BBA">BBA</option>
+                        <option value="BCA">BCA</option>
+                        <option value="BCOM(H)">BCOM(H)</option>
+                        <option value="MBA">MBA</option>
+                        <option value="MCA">MCA</option>
+                        <option value="MCOM">MCOM</option>
+                    </select>
+                    <div class="row">
+                        <div class="col-sm-2 mb-3"></div>
+                        <!-- Captcha Image -->
+                        <div class="col-sm-3 form-floating mb-3">
+                            <img src="/static/captcha_file/{{captcha_img_name}}" alt="" id="imgcaptcha" style="height: 100%; width: 100%;">
+                        </div>
+                        <!-- Refresh Captcha Button -->
+                        <div class="col-sm-1 text-center h1 mt-2">
+                            <i class="fa-solid fa-arrows-rotate" id="refreshcode" style="color: #74C0FC; cursor: pointer;" title="Refresh Code;"></i>
+                        </div>
+                        <!-- Type Captcha Value -->
+                        <div class="col-sm-4">
+                            <div class="form-floating mb-3">
+                                <input type="text" name="encaptcha" class="form-control" id="ecaptcha" placeholder="Type Captcha"/>
+                                <label for="emobile">Type Captcha</label>
+                            </div>  
+                        </div>
+                        <div class="col-sm-2 mb-3"></div>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary" id="ebtnsave" type="submit">Submit</button>
+                    </div>
+                </form>
+                {% if msg %}
+                <script>
+                    alert("{{ msg }}");
+                    // After the user clicks "OK", this line will redirect to the home page.
+                    window.location.href = "{{url_for('index')}}"; 
+                </script>
+                {% endif %}
+                <!-- {% if message%}
+                {{ message }}
+                {% endif%} -->
+            </div>
+            <div class="col-sm-5 shadow-lg mb-5 bg-body p-0" style="min-height: 100px; border-radius: 50px 0px 50px 0px;">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3608.438761698667!2d82.918039175237!3d25.255821677673264!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398e32d8078a2c2f%3A0xa6813f724988d305!2z4KS44KWN4KSV4KWC4KSyIOCkkeCkq-CkvCDgpK7gpYjgpKjgpYfgpJzgpK7gpYfgpILgpJ8g4KS44KS-4KSH4KSC4KS44KWH4KS4!5e0!3m2!1shi!2sin!4v1753427928334!5m2!1shi!2sin"  style="border:5px  gray; border-radius: 50px 0px 50px 0px; height: 100%; width: 100%; margin: 0px; padding: 0px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" ></iframe>
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+        {% include 'common/footer.html' %}
+        {% include 'common/chatpopup.html' %}
+    </div>
+    <script>
+        // Form Validation
+        $(document).ready(function(){
+            $('#ebtnsave').click(function(){
+                var ename=$('#ename').val().trim();
+                var eemail=$('#eemail').val().trim();
+                var emobile=$('#emobile').val().trim();
+                var captcha=$('#ecaptcha').val().trim();
+                // Remove old error messages
+                $('.err').remove();
+                // Validate Form Field
+                
+                // Validate Form Name
+                if(ename.length==0){
+                    $("#ename").after("<span class='err'>Please enter your name.</span>");
+                    status=false;
+                }
+                else if(ename.length<2){
+                    $("#ename").after("<span class='err'>Please enter your valid name.</span>");
+                    status=false;
+                }
+                // Validate Form Email
+                if(eemail.length==0){
+                    $("#eemail").after("<span class='err'>Please enter your email.</span>");
+                    status=false;
+                }
+                else if(!eemail.includes('@')){
+                    $("#eemail").after("<span class='err'>Please enter your valid email.</span>");
+                    status=false;
+                }
+                // Validate Form Mobile
+                if(emobile.length==0){
+                    $("#emobile").after("<span class='err'>Please enter your mobile number.</span>");
+                    status=false;
+                }
+                else if(emobile.length!=10){
+                    $("#emobile").after("<span class='err'>Please enter your valid mobile number.</span>");
+                    status=false;
+                }
+                else{
+                    var emobdigit=parseInt(emobile.charAt(0));
+                    if(!(emobdigit>=6 && emobdigit<=9)){
+                        $("#emobile").after("<span class='err'>Invalid Mobile Number.</span>");
+                        status=false;
+                    }
+                }
+                // Validate Form State
+                var estate=$('#estate').val();
+                if(estate=="Choose Your State"){
+                    $("#estate").after("<span class='err'>Please select your state.</span>");
+                    status=false;
+                }
+                // Validate Form City
+                var ecity=$('#ecity').val();
+                if(ecity=="Choose Your City"){
+                    $("#ecity").after("<span class='err'>Please select your city.</span>");
+                    status=false;
+                }
+                // Validate Form Course
+                var ecourse=$('#ecourse').val();
+                if(ecourse=="Choose Your Course"){
+                    $("#ecourse").after("<span class='err'>Please select your course.</span>");
+                    status=false;
+                }
+                // Validate Captcha
+                if(captcha.length==0){
+                    $("#ecaptcha").after("<span class='err'>Please enter captcha.</span>");
+                    return false;
+                }
+                return status;
+            });
+        });
+
+        // Code for State and city selection
+        const statesAndCities = {
+            "Andaman and Nicobar Islands": ["Adilabad", "Diglipur",  "Mayabunder", "Nicobar", "North Andaman","Port Blair", "South Andaman", "Tanuku", "Yanam"],
+            "Andhra Pradesh": ["Guntur", "Kurnool", "Nellore", "Srikakulam","Visakhapatnam", "Vijayawada"],
+            "Arunachal Pradesh": ["Itanagar", "Naharlagun", "Pasighat", "Sivasagar", "Tawang"],
+            "Assam": ["Dibrugarh","Guwahati", "Jorhat", "Nagaon", "Silchar", "Tezpur", "Tinsukia"],
+            "Bihar": [ "Bhagalpur","Bhojpur","Buxar","Darbhanga","Gaya","Hajipur","Jamalpur","Katihar","Madhubani","Munger","Muzaffarpur","Patna","Purnia","Rohtas","Saharsa","Samastipur","Sasaram","Sitamarhi","Siwan","Supaul","Vaishali","West Champaran"],
+            "Chandigarh": ["Amritsar","Barnala","Bathinda","Chandigarh","Firozpur","Faridkot","Fatehgarh Sahib","Ferozepur","Gurdaspur","Hoshiarpur","Jalandhar","Kapurthala","Ludhiana","Mansa","Moga","Muktsar","Nawanshahr","Pathankot","Patiala","Rupnagar","Sangrur","Shahid Bhagat Singh Nagar","Sri Muktsar Sahib","Tarn Taran","Zirakpur"],
+            "Chhattisgarh": ["Bhilai", "Bilaspur","Durg" ,"Korba","Mahasamund","Raigarh","Raipur","Rajnandgaon","Surajpur","Surguja","Udaipur"],
+            "Dadra and Nagar Haveli and Daman and Diu": ["Daman", "Diu", "Silvassa"],
+            "Delhi": ["Delhi","New Delhi","Noida"],
+            "Goa": [ "Bagaha","Mapusa","Margao","Panaji","Vasco da Gama" ],
+            "Gujarat": ["Ahmedabad", "Amreli", "Anand", "Aravalli", "Banaskantha", "Bharuch", "Bhavnagar", "Botad", "Chhota Udaipur", "Dahod", "Dang", "Devbhoomi Dwarka", "Gandhinagar", "Gir Somnath", "Gurugram", "Jamnagar", "Junagadh", "Kheda", "Kutch", "Mahisagar", "Mehsana", "Morbi", "Narmada", "Navsari", "Panchmahal", "Patan", "Porbandar", "Rajkot", "Sabarkantha", "Surat", "Surendranagar", "Tapi", "Vadodara", "Valsad", "Vapi"],
+            "Haryana": [ "Ambala", "Bahadurgarh","Faridabad", "Fatehabad", "Gohana", "Gurgaon", "Hisar", "Jhajjar", "Jind", "Kaithal", "Karnal", "Kurukshetra", "Mahendragarh", "Nuh", "Palwal", "Panchkula", "Panipat", "Rewari", "Rohtak", "Sirsa", "Sonipat", "Yamuna Nagar", "Yamunanagar"],
+            "Himachal Pradesh": ["Bilaspur", "Chamba", "Dalhousie","Dharamshala", "Hamirpur", "Kangra", "Kinnaur", "Kullu", "Lahaul and Spiti", "Mandi", "Sirmaur",  "Shimla", "Solan", "Una"],
+            "Jammu and Kashmir": ["Anantnag", "Bandipora", "Baramulla", "Budgam", "Doda", "Ganderbal", "Jammu", "Kathua", "Kishtwar", "Kulgam", "Kupwara", "Mirpur", "Nahan", "Reasi", "Samba", "Shopiyan", "Sopore", "Srinagar", "Udhampur"],
+            "Jharkhand": ["Bokaro","Chaibasa", "Deoghar","Dhanbad","Giridih","Hazaribag","Jamshedpur","Khunti","Lohardaga","Patratu","Ramgarh",,"Ranchi","Simdega","West Singhbhum","East Singhbhum","Yamuna Nagar"],
+            "Karnataka": ["Bengaluru", "Belgaum", "Bellary", "Bidar", "Bijapur", "Chamarajnagar", "Chikkaballapur", "Chikkamagaluru", "Chitradurga", "Dakshina Kannada", "Davanagere", "Dharwad", "Gadag", "Gulbarga", "Hassan", "Haveri","Hubballi", "Kodagu", "Kolar", "Koppal", "Mandya", "Mysuru", "Mangaluru", "Raichur", "Ramanagara", "Shivamogga", "Tumakuru", "Udupi", "Uttara Kannada", "Vijayapura"],
+            "Kerala": ["Kochi", "Kozhikode", "Malappuram", "Palakkad", "Thiruvananthapuram",  "Thrissur", "Wayanad"],
+            "Ladakh": ["Kargil", "Leh" ],
+            "Lakshadweep": ["Agatti","Kavaratti","Mokokchung",  "Minicoy"],
+            "Madhya Pradesh": ["Bhopal", "Burhanpur", "Chhatarpur", "Chhindwara", "Damoh", "Datia", "Dewas", "Dhar", "Guna", "Gwalior", "Harda", "Hoshangabad", "Indore",  "Jabalpur", "Jagdalpur", "Jhabua", "Katni", "Khandwa", "Khargone", "Mandla", "Mandsaur", "Morena", "Narsinghpur", "Neemuch", "Niwari", "Panna", "Raisen", "Rajgarh", "Ratlam", "Rewa", "Sagar", "Satna", "Sehore", "Seoni", "Shahdol", "Shajapur", "Sheopur", "Shivpuri", "Sidhi", "Tikamgarh", "Ujjain", "Umaria", "Vidisha"],
+            "Maharashtra": [ "Ahmednagar", "Aurangabad", "Beed", "Bhandara", "Buldhana", "Chandrapur", "Dhule", "Gadchiroli", "Gondia", "Hingoli", "Jalgaon", "Jalna", "Kolhapur", "Latur", "Mumbai Suburban","Mumbai",  "Nagpur", "Nanded", "Nandurbar", "Nashik", "Osmanabad", "Parbhani", "Pune", "Raigad", "Ratnagiri", "Sangli", "Satara", "Sholapur", "Sindhudurg", "Thane", "Wardha", "Washim", "Yavatma", "Yawal"],
+            "Manipur": ["Imphal", "Thoubal", "Bishnupur"],
+            "Meghalaya": ["Shillong", "Tura", "Jowai"],
+            "Mizoram": ["Aizawl", "Lunglei", "Saiha"],
+            "Nagaland": ["Kohima", "Dimapur", "Mokokchung"],
+            "Odisha": ["Bhubaneswar", "Cuttack", "Rourkela", "Puri"],
+            "Puducherry": ["Puducherry", "Karaikal", "Mahe", "Yanam"],
+            "Punjab": [ "Ajitgarh","Amritsar", "Barnala", "Bathinda", "Firozpur", "Faridkot", "Fatehgarh Sahib", "Fazilka", "Gurdaspur", "Hoshiarpur", "Jagraon","Jalandhar", "Kapurthala", "Ludhiana", "Mansa", "Moga", "Muktsar", "Nawanshahr", "Pathankot", "Patiala", "Rupnagar", "Sangrur", "Shahid Bhagat Singh Nagar", "Sohna","Sri Muktsar Sahib", "Tarn Taran", "Zirakpur"],
+            "Rajasthan": ["Ajmer", "Bikaner", "Bhilwara", "Jaipur", "Jaisalmer", "Jodhpur", "Kota", "Udaipur"],
+            "Sikkim": ["Gangtok", "Mangan", "Namchi"],
+            "Tamil Nadu": ["Chennai", "Coimbatore", "Cuddalore", "Dindigul", "Erode", "Kanyakumari", "Kodaikanal", "Madurai", "Ramanathapuram", "Salem", "Thanjavur", "Tiruchirappalli", "Tirunelveli", "Vellore", "Viluppuram", "Virudhunagar"],
+            "Telangana": ["Hyderabad", "Karimnagar", "Mahbubnagar", "Nalgonda", "Nizamabad", "Rangareddy", "Warangal"],
+            "Tripura": ["Agartala", "Dharmanagar", "Nagaon", "Udaipur"],
+            "Uttar Pradesh": ["Agra", "Allahabad", "Aligarh", "Ambedkar Nagar", "Amethi", "Amroha", "Auraiya", "Azamgarh", "Baghpat", "Bahraich", "Ballia", "Balrampur", "Banda", "Barabanki", "Bareilly", "Basti", "Bhadohi", "Bijnor", "Budaun", "Bulandshahr", "Chandauli", "Chitrakoot", "Deoria", "Etah", "Etawah", "Faizabad", "Farrukhabad", "Fatehpur", "Firozabad", "Gautam Buddha Nagar", "Ghaziabad", "Ghazipur", "Gonda", "Gorakhpur", "Hamirpur", "Hapur", "Hardoi", "Hathras", "Jalaun", "Jaunpur", "Jhansi", "Kannauj", "Kashipur",  "Kaushambi", "Kushinagar", "Lakhimpur Kheri", "Lalitpur", "Lucknow", "Maharajganj", "Mahoba", "Mainpuri", "Mathura", "Mau", "Meerut", "Mirzapur", "Moradabad", "Muzaffarnagar", "Pilibhit", "Pratapgarh", "Prayagraj", "Raebareli", "Rampur", "Saharanpur", "Sambhal", "Sant Kabir Nagar", "Shahjahanpur", "Shamli", "Shravasti", "Siddharthnagar", "Sitapur", "Sonbhadra", "Sultanpur", "Unnao", "Kanpur","Lucknow", "Varanasi"],
+            "Uttarakhand": [ "Almora","Dehradun", "Haldwani", "Haridwar", "Nainital", "Roorkee", "Rishikesh", "Rudrapur", "Uttarkashi"],
+            "West Bengal": [ "Asansol","Durgapur", "Kolkata","Siliguri" ]
+        };
+
+        const stateSelect = document.getElementById('estate');
+        const citySelect = document.getElementById('ecity');
+
+        stateSelect.addEventListener('change', (event) => {
+            const selectedState = event.target.value;
+            const cities = statesAndCities[selectedState] || [];
+
+            // Clear previous city options
+            citySelect.innerHTML = '<option selected>Choose Your City</option>';
+
+            // Populate new city options
+            cities.forEach(ecity => {
+                const option = document.createElement('option');
+                option.value = ecity;
+                option.textContent = ecity;
+                citySelect.appendChild(option);
+            });
+        });
+
+    </script>
+    
+</body>
+</html>

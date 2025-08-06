@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Analytics</title>
+    {% include 'common/mylinks.html' %}
+</head>
+<body>
+    <div class="container-fluid">
+        {% include 'common/header.html' %}
+        <div class="row main" style="min-height: 600px; background-color: #f9ebea;">
+            <div>
+                <input type="number" id="txtnum1" placeholder="Enter First Number :"><br>
+                <input type="number" id="txtnum2" placeholder="Enter Second Number :"><br>
+                <input type="button" value="Add" id="btnadd"/><br>
+                <p id="para"></p>
+            </div>
+        </div>
+        {% include 'common/footer.html' %}
+    </div>
+
+</body>
+<script>
+    $(document).ready(function(){
+        // alert('ok');
+        $('#btnadd').click(function(){
+            var num1,num2
+            num1=parseInt($('#txtnum1').val())
+            num2=parseInt($('#txtnum2').val())
+            var obj={f_num: num1, s_num: num2}
+            // AJAX Call
+            $.getJSON("/addnum",obj,function(res){
+                $('#para').text(res)
+            })
+        })
+    });
+</script>
+</html>

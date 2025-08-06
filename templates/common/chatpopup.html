@@ -1,0 +1,50 @@
+<style>
+        /* Custom styles for the help button */
+        .chat-button {
+            width: 64px;
+            height: 64px;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .chat-button:hover {
+            transform: scale(1.1);
+        }
+
+        /* Optional: Add a smooth transition for the button's appearance */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .chat-button-animation {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+    </style>
+
+<!-- Floating Help Button -->
+ 
+    <button id="chatButton" 
+            class="chat-button chat-button-animation btn btn-primary rounded-circle shadow-lg d-flex align-items-center justify-content-center position-fixed bottom-0 end-0 m-4">
+        <!-- Font Awesome Chat Icon -->
+         <a href="#chat"></a>
+        <i class="fa-solid fa-comments fa-xl"></i>
+        </a>
+    </button>
+ 
+    
+    <!-- End of Floating Help Button -->
+
+<script>
+        // Get the button element from the DOM
+        const chatButton = document.getElementById('chatButton');
+
+        // Add a click event listener to the button
+        chatButton.addEventListener('click', () => {
+            // Log to the console for testing purposes
+            console.log('Help button clicked! Attempting to navigate to chat page.');
+
+            // --- IMPORTANT ---
+            // The link "{{url_for('open_chat')}}" is server-side template syntax (e.g., for Flask/Jinja2).
+            window.location.href ="{{url_for('open_chat')}}"; 
+        });
+    </script>
