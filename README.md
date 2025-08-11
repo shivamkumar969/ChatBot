@@ -6,7 +6,7 @@ How to View this project
     5. install flask by using below command:- pip install flask
     6. pip install numpy
     7. pip install pandas
-    8. pip install matplotlib/
+    8. pip install matplotlib
     9. pip install flask-mail
     10. pip install captcha
     11. pip install openpyxl
