@@ -6,6 +6,9 @@ How to View this project
     5. install flask by using below command:- pip install flask
     6. pip install numpy
     7. pip install pandas
-    8. pip install matplotlib
-    9. Now run your project by using below command:- python projectname.py
-    10. It will run your project. now ctrl+click the link "http://127.0.0.1:5000" in terminal. It will open your project in browser.
+    8. pip install matplotlib/
+    9. pip install flask-mail
+    10. pip install captcha
+    11. pip install openpyxl
+    12. Now run your project by using below command:- python projectname.py
+    13. It will run your project. now ctrl+click the link "http://127.0.0.1:5000" in terminal. It will open your project in browser.
