@@ -1,60 +1,116 @@
-<div class="row header" style="min-height: auto; background-color: navy;">
-    <div class="col-sm-1" style="margin: 0px; padding: 15px;">
-        <img src="{{url_for('static',filename='images/mainlogo.jpg')}}" style="height: 100%; width:100%; mix-blend-mode: screen; border-radius: 50%;">
-    </div>
-    <div class="col-sm-11 text-center text-white pt-4" style="margin: 0px; padding-left: 100px;">
-        <span class="h1" style="padding-right: 0px; font-family: Bitcount, system-ui; font-size: 70px;" >
-            <i class="bi bi-robot"></i> SMS Bot
-            <span class="h4 pt-5 " style="margin-left: 0px; padding-left: 0px; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">your smart message assistent</span>
-        </span>
-    </div>
-</div>
-<div class="row menu" style="min-height: auto; background-color: maroon; ">
-    <div class="col-sm-12" style="padding: 0px; margin: 0px">
-        <!-- Navbar Start -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="{{url_for('index')}}">Home</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{url_for('open_about')}}">About US</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{url_for('open_chat')}}">Chat</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{url_for('open_faq')}}">FAQ</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{url_for('open_feedback')}}">Feedback</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{url_for('open_chatanalytics')}}">Chat Analytics</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{url_for('open_contact')}}">Contact</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{url_for('open_enquiry')}}">Enquiry</a>
-                        </li>
-                        <!-- <li class="nav-item">
-                            <a class="nav-link" href="{{url_for('open_testajax')}}">AJAX</a>
-                        </li> -->
-                    </ul>
-                </div>
+<div class="header">
+    <div class="container-fluid">
+        <div class="row d-flex align-items-center">
+            <div class="col-3 col-md-1 text-center header-logo">
+                <img src="{{url_for('static',filename='images/mainlogo.jpg')}}" alt="SMS Bot Logo">
             </div>
-        </nav>
-        <!-- Navbar End -->
+            <div class="col-9 col-md-11 header-title text-center text-md-start">
+                <span class="main-title">
+                    <i class="bi bi-robot"></i> SMS Bot
+                </span>
+                <br class="d-md-none"> <span class="subtitle">
+                    your smart message assistant
+                </span>
+            </div>
+        </div>
     </div>
 </div>
+<div class="menu">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{url_for('index')}}">Home</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{url_for('open_about')}}">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('open_chat')}}">Chat</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('open_faq')}}">FAQ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('open_feedback')}}">Feedback</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('open_chatanalytics')}}">Chat Analytics</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('open_contact')}}">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('open_enquiry')}}">Enquiry</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+
 <style>
-    .nav-link{
-        margin-left: 10px;
-        margin-right: 10px;
+    /* --- Google Font Import --- */
+    @import url('https://fonts.googleapis.com/css2?family=Bitcount:wght@100..900&display=swap');
+
+    /* --- Header Styles --- */
+    .header {
+        background-color: navy;
+        color: white;
+        padding: 1rem 0;
+        
     }
-@import url('https://fonts.googleapis.com/css2?family=Bitcount:wght@100..900&display=swap');
+    .header-logo img {
+        max-width: 100%;
+        height: auto;
+        max-height: 90%; /* Constrain logo height */
+        mix-blend-mode: screen;
+        border-radius: 50%;
+    }
+    .main-title {
+        font-family: 'Bitcount', system-ui;
+        font-size: 4.5rem; /* 72px for large screens */
+        font-weight: 500;
+    }
+    .subtitle {
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 1.1rem;
+        margin-left: 0.25rem;
+    }
+
+    /* --- Menu/Navbar Styles --- */
+    .menu {
+        background-color: rgb(109, 187, 232);
+    }
+    .navbar {
+        background-color: rgb(109, 187, 232) !important; /* Ensure navbar matches parent */
+    }
+    .nav-link {
+        margin: 0 0.5rem;
+    }
+    /* Style for the hamburger icon on dark backgrounds */
+    .navbar-toggler {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+    .navbar-dark .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+
+    /* --- Responsive Adjustments --- */
+    /* For tablets and mobile phones (screens smaller than 768px) */
+    @media (max-width: 768px) {
+        .main-title {
+            font-size: 2.5rem; /* Reduced font size for smaller screens */
+        }
+        .subtitle {
+            font-size: 0.9rem; /* Smaller subtitle */
+            display: block; /* Make subtitle appear on a new line */
+            margin-left: 0;
+        }
+        .header-title {
+            padding-left: 0;
+        }
+    }
 </style>
