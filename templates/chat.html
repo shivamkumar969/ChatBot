@@ -7,160 +7,213 @@
     {% include 'common/mylinks.html' %}
 </head>
 <style>
-    .my-rotated-icon {
-        transform: rotate(90deg);
+    /* --- GENERAL CHAT STYLES --- */
+    .chat-container {
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     }
-    #dv_chatwindows {
-        /* For Firefox */
-        scrollbar-width: none;
-        
-        /* For Internet Explorer and Edge */
-        -ms-overflow-style: none;
+    .chat-widget {
+        border-radius: 25px;
+        background-color: beige;
+        overflow: hidden; /* Ensures child elements respect the border radius */
     }
 
-    /* For Chrome, Safari, and Opera */
+    /* --- CHAT HEADER --- */
+    .chat-header {
+        background-image: linear-gradient(90deg, rgb(119, 186, 225), rgb(0, 187, 255));
+        padding: 15px 20px;
+    }
+    .chat-header-logo {
+        height: 60px;
+        width: 60px;
+        border-radius: 50%;
+        mix-blend-mode: screen;
+    }
+    .chat-header-text h1 {
+        color: white;
+        font-weight: 600;
+        font-size: 1.75rem;
+        margin-bottom: 0;
+    }
+    .chat-header-text p {
+        color: #e0f7ff;
+        margin-bottom: 0;
+    }
+    .online-indicator {
+        color: #2bff00;
+    }
+
+    /* --- CHAT BODY & MESSAGES --- */
+    .chat-body {
+        padding: 15px;
+    }
+    #dv_chatwindows {
+        height: 400px;
+        overflow-y: scroll;
+        padding: 10px;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
     #dv_chatwindows::-webkit-scrollbar {
         display: none;
     }
-
-    /* Container for a single message row (avatar + bubble) */
     .message-row {
         display: flex;
-        align-items: flex-end; /* Aligns avatar and bubble at the bottom */
+        align-items: flex-end;
         margin-bottom: 15px;
         clear: both;
     }
-
-    /* Styles for the message bubble itself */
     .message-box {
         padding: 10px 18px;
         border-radius: 20px;
-        max-width: 70%;
+        max-width: 80%;
     }
-
-    /* Styles for the circular avatar image */
     .logo {
         width: 40px;
         height: 40px;
         border-radius: 50%;
-        object-fit: cover; /* feet logo in the circle */
+        object-fit: cover;
     }
-
-    /* --- BOT STYLES (LEFT) --- */
-    .bot .logo {
-        margin-right: 10px;
-    }
+    .bot .logo { margin-right: 10px; }
     .bot .message-box {
-        background-color: #f1f0f0; /* bot message send message box color */
+        background-color: #f1f0f0;
         border-bottom-left-radius: 5px;
     }
-
-    /* --- USER STYLES (RIGHT) --- */
-    .user {
-        justify-content: flex-end; /* Pushes content to the right */
+    .user { 
+        justify-content: flex-end; 
     }
-    .user .logo {
-        margin-left: 10px;
+    .user .logo { 
+        margin-left: 10px; 
     }
     .user .message-box {
-        background-color: #dcf8c6; /* user send message box color*/
+        background-color: #dcf8c6;
         border-bottom-right-radius: 5px;
     }
 
+    /* --- (UPDATED) CHAT FOOTER (INPUT AREA) --- */
+    .chat-footer {
+        padding: 15px 20px;
+        background-color: beige;
+    }
+    .chat-footer .form-control {
+        border-radius: 50px;
+        height: 50px;
+        border: 1px solid #ddd;
+        box-shadow: none; /* Removes default focus glow */
+    }
+    .chat-footer .form-control:focus {
+        border-color: #0dcaf0; /* Matches the button color on focus */
+    }
+    .chat-footer .btn-send {
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+        border: none;
+        flex-shrink: 0; /* Prevents the button from shrinking */
+        transition: background-color 0.2s ease-in-out; /* Smooth transition for hover */
+    }
+    .chat-footer .btn-send:hover {
+        background-color: #08a5c4; /* A slightly darker shade for hover */
+    }
+
+
+    /* --- RESPONSIVE ADJUSTMENTS --- */
+    @media (max-width: 768px) {
+        #dv_chatwindows {
+            height: 350px;
+        }
+        .chat-header-text h1 {
+            font-size: 1.5rem;
+        }
+    }
+    .head{
+        padding: 0px;
+    }
 </style>
 <body>
-    <div class="container-fluid" style="background-color: #fff9f7;">
+    <div class="container-fluid head" style="background-color: #fff9f7;">
         {% include 'common/header.html' %}
-        <section id="chat">
-            <div class="row m-3" >
-            <h3 class="text-center" style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">How may I help you today?</h3><hr/>
-            <div class="col-sm-3"></div>
-            <div class="col-sm-6">
-                <div class="shadow shadow-lg p-0" style="min-height:300px; width: 100%; border-radius: 50px; background-color: beige;">
-                    <div class="row m-0 p-0" style="min-height: 100px; background-image: linear-gradient(90deg , rgb(119, 186, 225),rgb(0, 187, 255)); border-radius: 50px 50px 0px 0px; border: none;">
-                        <div class="col-sm-2">
-                            <a href="#chat">
-                                <img src="{{url_for('static', filename='images/mainlogo.jpg')}}" alt="" style="height: 90%; width: 100%; border-radius: 50%; margin: 5px; padding: 6px; mix-blend-mode: screen;"/>
-                            </a>
+
+        <section id="chat" class="chat-container py-4">
+            <div class="container"> 
+                <div class="row"> 
+                    <h3 class="text-center">How may I help you today?</h3>
+                    <hr class="mb-4"/>
+                    <div class="col-12 col-md-10 col-lg-8 col-xl-6 mx-auto">
+                        <div class="shadow-lg chat-widget">
                             
-                        </div>
-                        <div class="col-sm-10 mt-3">
-                            <span class="h1" style="padding: 50px;">Need help?</span>
-                            <p style="color: white; padding-left: 50px;"><i class="fa-solid fa-circle" style="color: #2bff00;"></i> We reply immediately</p>
-                        </div>
-                    </div>
-                    <div class="card-body"  >
-                        <div id="dv_chatwindows" style="height: 400px; width: 90%; margin: 1px;padding: 2%; overflow-y: scroll; background-color: beige;"></div>
-                    </div>
-                    <div class="card-body">
-                        <div class="row mt-3">
-                            <div class="col-sm-1"></div>
-                            <div class="col-sm-9" style=" padding-right: 10px;">
-                                <div class="form-floating" >
-                                    <input type="text" class="form-control" id="txtchat" aria-describedby="btnsend" onkeydown="sendOnEnter(event)" placeholder="Type your query or concern.." style="margin: 0px;border-radius: 50px; width: 100%;">
-                                    <label for="floatingInput">Type your query or concern..</label>
+                            <div class="chat-header">
+                                <div class="d-flex align-items-center">
+                                    <div class="col-auto">
+                                        <a href="#chat">
+                                            <img src="{{url_for('static', filename='images/mainlogo.jpg')}}" alt="Logo" class="chat-header-logo"/>
+                                        </a>
+                                    </div>
+                                    <div class="col ps-3 chat-header-text">
+                                        <h1>Need help?</h1>
+                                        <p><i class="fa-solid fa-circle online-indicator"></i> We reply immediately</p>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-sm-1" style=" padding-left: 1px; padding-right: 1px;">
-                                <button type="button" id="btnsend" class="btn btn-outline-secondary btn-info" style=" margin: 0px; height: 100%; width: 100%; font-size: 25px; border-radius: 50%; border: none; text-align: center;">
-                                    <i class="fa-solid fa-paper-plane fa-rotate-by" style="--fa-rotate-angle: 45deg; "></i>
-                                </button>
+
+                            <div class="chat-body">
+                                <div id="dv_chatwindows"></div>
                             </div>
-                            <div class="col-sm-1"></div>
+
+                            <div class="chat-footer">
+                                <div class="d-flex align-items-center">
+                                    <input type="text" class="form-control" id="txtchat" onkeydown="sendOnEnter(event)" placeholder="Type your query or concern..">
+                                    
+                                    <button type="button" id="btnsend" class="btn btn-info btn-send text-white ms-2">
+                                        <i class="fa-solid fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
-                </div>            
+                </div>
             </div>
-            <div class="col-sm-3">
-                <!-- <img src="{{url_for('static', filename='images/BCA.jpg')}}" alt="" > -->
-            </div>
-        </div>
         </section>
         
         {% include 'common/footer.html' %}
     </div>
     <script>
-        // Start Chatbot Code
         $(document).ready(function(){
-            // Click to send button
-            $("#btnsend").click(function(){
-                // alert("ok")
-                var cur_chat=$('#txtchat').val().trim();
-                if(cur_chat.length>0){
-                    var chat_window_obj=$('#dv_chatwindows');
+            function sendMessage() {
+                var cur_chat = $('#txtchat').val().trim();
+                if(cur_chat.length > 0){
+                    var chat_window_obj = $('#dv_chatwindows');
+                    
                     var user_html = `<div class="message-row user">
                                         <div class="message-box">${cur_chat}</div>
                                         <img src="{{url_for('static', filename='images/user.png')}}" class="logo">
                                     </div>`;
                     chat_window_obj.append(user_html);
 
-                    // chat_window_obj.html(new_update);
                     $("#txtchat").val("");
-                    // Auto-scroll
                     chat_window_obj.scrollTop(chat_window_obj[0].scrollHeight);
 
-                    // start Ajax search
-                    my_obj={userquery:cur_chat};
-                    $.getJSON("getbotanswer",my_obj,function(bot_ans){
-                        // alert(bot_ans);
+                    $.getJSON("getbotanswer", { userquery: cur_chat }, function(bot_ans){
                         var bot_html = `<div class="message-row bot">
                                             <img src="{{url_for('static', filename='images/mainlogo.jpg')}}" class="logo">
                                             <div class="message-box">${bot_ans}</div>
                                         </div>`;
-                        
                         chat_window_obj.append(bot_html);
-                        // Auto-scroll
                         chat_window_obj.scrollTop(chat_window_obj[0].scrollHeight);
                     });
-                    // end Ajax search
                 }
-            });
-        });
-        function sendOnEnter(event){
-            if(event.key==="Enter"){
-                $('#btnsend').trigger("click");
             }
-        }
+
+            $("#btnsend").click(sendMessage);
+
+            window.sendOnEnter = function(event) {
+                if(event.key === "Enter") {
+                    event.preventDefault();
+                    sendMessage();
+                }
+            }
+        });
     </script>
 </body>
 </html>
