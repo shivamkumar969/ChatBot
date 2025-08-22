@@ -5,91 +5,152 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact</title>
     {% include 'common/mylinks.html' %}
+    <style>
+        body {
+            background-color: #fff9f7;
+        }
+        .section-title {
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: #d9534f;
+        }
+
+        /* --- Contact Card Styles --- */
+        .contact-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden; /* This is key for the child elements to respect the radius */
+        }
+        .contact-card .card-body {
+            padding: 2rem;
+        }
+        .contact-card .card-title {
+            font-style: italic;
+            font-weight: 500;
+            color: #6c757d;
+        }
+
+        /* --- Map & Image Styles --- */
+        .map-embed,
+        .contact-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: none;
+            min-height: 300px; /* Ensures a good height on mobile */
+        }
+
+        /* --- Icon & Text Section Styles --- */
+        .contact-info-icon {
+            font-size: 4rem; /* 64px for desktop */
+            color: #0dcaf0;
+            line-height: 1;
+        }
+        .contact-info-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .contact-info-list li {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- Responsive Adjustments --- */
+        @media (max-width: 768px) {
+            .contact-card .card-body {
+                text-align: center;
+            }
+            .contact-info {
+                flex-direction: column; /* Stack icon and text on mobile */
+            }
+            .contact-info-icon {
+                font-size: 3rem; /* Smaller icon on mobile */
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="container-fluid" style="background-color: #fff9f7;">
+    <div class="container-fluid p-0">
         {% include 'common/header.html' %}
-        <div class="row main" style="min-height: 600px;">
-            <!-- <h1 class="text-center text-danger">Contact</h1> -->
-            <div class="col-sm-2 mt-3 mb-3"></div>
-            <div class="col-sm-8 mt-3 mb-3">
-                <div class="card mb-3" style="min-height: 200px; border-radius: 50px 0px 0px 0px;">
-                    <div class="row g-0" >
-                        <div class="col-md-4 p-1 pb-0">
-                            <!-- <img src="{{url_for('static',filename='images/hcard2.png')}}" class="img-fluid rounded-start" alt="" style="height: 200px;"> -->
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3608.438761698667!2d82.918039175237!3d25.255821677673264!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398e32d8078a2c2f%3A0xa6813f724988d305!2z4KS44KWN4KSV4KWC4KSyIOCkkeCkq-CkvCDgpK7gpYjgpKjgpYfgpJzgpK7gpYfgpILgpJ8g4KS44KS-4KSH4KSC4KS44KWH4KS4!5e0!3m2!1shi!2sin!4v1753427928334!5m2!1shi!2sin" style=" min-height: 200px; width: 300px; border-top: 5px solid gray; border-left: 5px solid gray; border-radius: 50px 0px 0px 0px; margin: 0px; padding: 0px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" ></iframe>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-sm-12"><h5 class="card-title h4" style="font-style: italic;">HOW TO REACH</h5></div>
-                                    <div class="col-sm-3 text-center" style="font-size: 80px;">
-                                        <a href="https://maps.app.goo.gl/dxM5PBEqjWfxrnvR8"><i class="bi bi-geo-alt-fill"></i></a>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <p class="card-text">
-                                            <h4>The Institute is located at a distance of :</h4>
-                                            <ul class="h6">
-                                                <li>35 KM from the Babatpur airport🛬🛫</li>
-                                                <li>13 KM from the Varanasi Jn. Railway Station 🚂🚃🚃</li>
-                                                <li>13 KM from the Roadways Bus Stand 🚌🚌🚌</li>
-                                            </ul>
-                                        </p>
-                                    </div>
-                                </div>                                
-                            </div>
-                        </div>
-                    </div>
-                </div>  
-                <div class="card mb-3" style="min-height: 200px;">
-                    <div class="row g-0 p-0 m-0">
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-sm-12"><h5 class="card-title h4" style="font-style: italic; text-align: right;">CAMPUS LOCATION</h5></div>
-                                    <div class="col-sm-9" style="margin-top: 0px;">
-                                        <p class="card-text">
-                                            <h5>School of Management Sciences Campus, Khusipur, Bachhawn, Uttar Pradesh 221011</h5>
-                                            <h6>Phone: 07052055555, 08953761666, 08953940777</h6>
-                                        </p>
-                                    </div>
-                                    <div class="col-sm-3 text-center" style="font-size: 80px;">
-                                        <a href="https://maps.app.goo.gl/dxM5PBEqjWfxrnvR8"><i class="bi bi-building"></i></a>
-                                    </div>
-                                </div>                                
-                            </div>
-                        </div>
-                        <div class="col-md-4 p-1">
-                            <img src="{{url_for('static',filename='images/college1.png')}}" class="img-fluid rounded-start" alt=""  style=" min-height: 200px; width: 100%; border-right: 5px solid gray;">
-                        </div>
-                    </div>
-                </div> 
-                <div class="card mb-3" style="min-height: 200px; border-radius: 0px 0px 50px 0px;">
-                    <div class="row g-0" >
-                        <div class="col-md-4 p-1 pb-0">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1835905.3027665121!2d79.89354844930786!3d26.008922315266247!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398e2de2189dfd99%3A0xa6540dd6037eb288!2z4KS44KWN4KSV4KWC4KSyIOCkkeCkq-CkvCDgpK7gpYjgpKjgpYfgpJzgpK7gpYfgpILgpJ8g4KS44KS-4KSH4KSC4KS44KWH4KSc!5e0!3m2!1shi!2sin!4v1753558511842!5m2!1shi!2sin" style=" min-height: 200px; width: 300px; border-left: 5px solid gray; border-bottom: 5px solid gray; border-radius: 0px 0px 0px 0px;"  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-sm-12"><h5 class="card-title h4" style="font-style: italic;">CITY OFFICE</h5></div>
-                                    <div class="col-sm-3 text-center" style="font-size: 80px;">
-                                        <a href="https://maps.app.goo.gl/MJa95TCiiXq4JraD6"><i class="bi bi-buildings-fill"></i></a>
-                                    </div>
-                                    <div class="col-sm-9" style="margin-top: 0px;">
-                                        <p class="card-text">
-                                            <h5>School of Management Sciences 6th Floor, Vinayak Plaza, Maldahiya Crossing, Maldahiya, Chetganj, Varanasi, Uttar Pradesh 221001</h5>
-                                            <h4>Phone: 8400277770</h4>
-                                        </p>
-                                    </div>
-                                </div>                                
+        <div class="container my-5">
+            <h1 class="text-center section-title">Contact Us</h1>
+
+            <div class="card shadow-sm mb-4 contact-card">
+                <div class="row g-0">
+                    <div class="col-lg-5">
+                        <iframe class="map-embed" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3608.675711211754!2d82.99268337502758!3d25.24785462943714!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398e1f0b48157e33%3A0x2b75f16955a6428c!2sSchool%20of%20Management%20Sciences%2C%20Varanasi!5e0!3m2!1sen!2sin!4v1724180470678!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    <div class="col-lg-7 d-flex align-items-center">
+                        <div class="card-body">
+                            <h5 class="card-title">HOW TO REACH</h5>
+                            <div class="d-flex align-items-center mt-3 contact-info">
+                                <div class="flex-shrink-0 me-4">
+                                    <a href="https://maps.app.goo.gl/gQf7DqLzS7P5HqC5A" target="_blank">
+                                        <i class="bi bi-geo-alt-fill contact-info-icon"></i>
+                                    </a>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h4>The Institute is located at a distance of:</h4>
+                                    <ul class="contact-info-list h6">
+                                        <li>🛬 35 KM from the Babatpur airport</li>
+                                        <li>🚂 13 KM from the Varanasi Jn. Railway Station</li>
+                                        <li>🚌 13 KM from the Roadways Bus Stand</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>               
+                </div>
             </div>
-            <div class="col-sm-2 mt-3 mb-3"></div>
+
+            <div class="card shadow-sm mb-4 contact-card">
+                <div class="row g-0">
+                    <div class="col-lg-7 d-flex align-items-center order-2 order-lg-1">
+                        <div class="card-body">
+                            <h5 class="card-title text-lg-end">CAMPUS LOCATION</h5>
+                            <div class="d-flex align-items-center mt-3 contact-info">
+                                <div class="flex-grow-1 text-lg-end">
+                                    <h5>School of Management Sciences Campus</h5>
+                                    <p class="text-muted mb-2">Khusipur, Bachhawn, Uttar Pradesh 221011</p>
+                                    <h6>Phone: 07052055555, 08953761666</h6>
+                                </div>
+                                <div class="flex-shrink-0 ms-4">
+                                    <i class="bi bi-building contact-info-icon"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 order-1 order-lg-2">
+                        <img src="{{url_for('static',filename='images/college1.png')}}" class="contact-image" alt="College Campus">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow-sm mb-4 contact-card">
+                <div class="row g-0">
+                    <div class="col-lg-5">
+                         <iframe class="map-embed" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3606.845942858102!2d82.99187127502986!3d25.30932842813583!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398e2fa5e2a2228d%3A0x36a596c6cc155f9a!2sSchool%20of%20Management%20Sciences%20City%20Office!5e0!3m2!1sen!2sin!4v1724180517921!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    <div class="col-lg-7 d-flex align-items-center">
+                        <div class="card-body">
+                            <h5 class="card-title">CITY OFFICE</h5>
+                            <div class="d-flex align-items-center mt-3 contact-info">
+                                <div class="flex-shrink-0 me-4">
+                                    <i class="bi bi-buildings-fill contact-info-icon"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                     <h5>Vinayak Plaza, 6th Floor</h5>
+                                     <p class="text-muted mb-2">Maldahiya Crossing, Chetganj, Varanasi, Uttar Pradesh 221001</p>
+                                     <h4>Phone: 8400277770</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
         {% include 'common/footer.html' %}
         {% include 'common/chatpopup.html' %}
