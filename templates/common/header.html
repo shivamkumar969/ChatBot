@@ -1,116 +1,190 @@
-<div class="header">
-    <div class="container-fluid">
-        <div class="row d-flex align-items-center">
-            <div class="col-3 col-md-1 text-center header-logo">
-                <img src="{{url_for('static',filename='images/mainlogo.jpg')}}" alt="SMS Bot Logo">
-            </div>
-            <div class="col-9 col-md-11 header-title text-center text-md-start">
-                <span class="main-title">
-                    <i class="bi bi-robot"></i> SMS Bot
-                </span>
-                <br class="d-md-none"> <span class="subtitle">
-                    your smart message assistant
-                </span>
+<header class="site-header">
+   <div class="header">
+        <div class="container">
+            <div class="row d-flex align-items-center">
+                <div class="col-2 col-md-1 header-logo">
+                    <img src="{{url_for('static',filename='images/mainlogo.jpg')}}" alt="SMS Bot Logo">
+                </div>
+                <div class="col-10 col-md-11 header-title text-center text-md-start">
+                    <span class="main-title">
+                        <i class="bi bi-robot"></i> SMS Bot
+                    </span>
+                    <br class="d-md-none"> <span class="subtitle">
+                        your smart message assistant
+                    </span>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="menu">
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="{{url_for('index')}}">Home</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{url_for('open_about')}}">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{url_for('open_chat')}}">Chat</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{url_for('open_faq')}}">FAQ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{url_for('open_feedback')}}">Feedback</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{url_for('open_chatanalytics')}}">Chat Analytics</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{url_for('open_contact')}}">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{url_for('open_enquiry')}}">Enquiry</a>
-                    </li>
-                </ul>
+    <div class="menu">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container">
+                <a class="navbar-brand" href="{{url_for('index')}}">Home</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+    <span class="navbar-toggler-icon"></span>
+</button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.endpoint == 'open_about' %}active{% endif %}" href="{{url_for('open_about')}}">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.endpoint == 'open_chat' %}active{% endif %}" href="{{url_for('open_chat')}}">Chat</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.endpoint == 'open_faq' %}active{% endif %}" href="{{url_for('open_faq')}}">FAQ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.endpoint == 'open_feedback' %}active{% endif %}" href="{{url_for('open_feedback')}}">Feedback</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.endpoint == 'open_chatanalytics' %}active{% endif %}" href="{{url_for('open_chatanalytics')}}">Chat Analytics</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.endpoint == 'open_contact' %}active{% endif %}" href="{{url_for('open_contact')}}">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.endpoint == 'open_enquiry' %}active{% endif %}" href="{{url_for('open_enquiry')}}">Enquiry</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
-</div>
-
+        </nav>
+    </div>
+</header>
 <style>
-    /* --- Google Font Import --- */
-    @import url('https://fonts.googleapis.com/css2?family=Bitcount:wght@100..900&display=swap');
+/* --- FIX FOR STICKY HEADER --- */
 
-    /* --- Header Styles --- */
-    .header {
-        background-color: navy;
-        color: white;
-        padding: 1rem 0;
-        
-    }
-    .header-logo img {
-        max-width: 100%;
-        height: auto;
-        max-height: 90%; /* Constrain logo height */
-        mix-blend-mode: screen;
-        border-radius: 50%;
-    }
-    .main-title {
-        font-family: 'Bitcount', system-ui;
-        font-size: 4.5rem; /* 72px for large screens */
-        font-weight: 500;
-    }
+/* Rule 1: This makes the entire header sticky and keeps it on top */
+.site-header {
+    /* position: sticky; */
+    top: 0;
+    width: 100%;
+    z-index: 1020;
+}
+
+/* Rule 2: This pushes the page content down from under the header */
+body {
+    /* If your new header height is 180px, change this value */
+    padding-top: 180px; 
+}
+
+/* --- Google Font Import --- */
+@import url('https://fonts.googleapis.com/css2?family=Bitcount:wght@100..900&display=swap');
+
+/* --- Header Styles (Top Navy Part) --- */
+.header {
+    background-color: navy;
+    color: white;
+    padding: 1rem 0;
+}
+.header-logo img {
+    max-width: 100%;
+    max-height: 120px; /* <<< Change this value to make it bigger (e.g., 110px) */
+    mix-blend-mode: screen;
+    border-radius: 50%;
+}
+.main-title {
+    font-family: 'Bitcount', system-ui;
+    font-size: clamp(2.25rem, 8vw, 4.5rem); 
+    font-weight: 500;
+}
+.subtitle {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    margin-left: 0.25rem;
+}
+
+/* --- Menu/Navbar Styles (Bottom Blue Part) --- */
+.menu {
+    background-color: rgb(109, 187, 232);
+    /* REMOVED: The position and z-index rules here are no longer needed */
+    /* The .site-header rule now controls this. */
+}
+.navbar {
+    background-color: rgb(109, 187, 232) !important;
+}
+.nav-link {
+    margin: 0 0.5rem;
+}
+.navbar-toggler {
+    /* background-color: rgba(255, 255, 255, 0.1); */
+    border: none;
+    padding: 0;
+}
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+/* Create the three bars for the hamburger icon */
+.navbar-toggler .navbar-toggler-icon {
+    background-image: none;
+    height: 2px;
+    width: 25px;
+    background-color: white;
+    position: relative;
+    transition: background-color 0.2s ease-out;
+}
+
+.navbar-toggler .navbar-toggler-icon::before,
+.navbar-toggler .navbar-toggler-icon::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    height: 2px;
+    width: 25px;
+    background-color: white;
+    transition: transform 0.2s ease-out;
+}
+
+.navbar-toggler .navbar-toggler-icon::before {
+    top: -8px; /* Position the top bar */
+}
+
+.navbar-toggler .navbar-toggler-icon::after {
+    top: 8px; /* Position the bottom bar */
+}
+
+/* --- The Animation --- */
+/* This targets the button when the menu is OPEN */
+
+/* 1. Hide the middle bar */
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+    background-color: transparent;
+}
+
+/* 2. Rotate the top bar 45 degrees */
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::before {
+    transform: translateY(8px) rotate(45deg);
+}
+
+/* 3. Rotate the bottom bar -45 degrees */
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::after {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 767.98px) {
     .subtitle {
-        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-        font-size: 1.1rem;
-        margin-left: 0.25rem;
+        display: block;
+        margin-left: 0;
     }
+    .header-title {
+        padding-left: 0;
+    }
+}
 
-    /* --- Menu/Navbar Styles --- */
-    .menu {
-        background-color: rgb(109, 187, 232);
-    }
-    .navbar {
-        background-color: rgb(109, 187, 232) !important; /* Ensure navbar matches parent */
-    }
-    .nav-link {
-        margin: 0 0.5rem;
-    }
-    /* Style for the hamburger icon on dark backgrounds */
-    .navbar-toggler {
-        background-color: rgba(255, 255, 255, 0.1);
-    }
-    .navbar-dark .navbar-toggler-icon {
-        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-    }
+/* --- Fix for Collapsed Navbar Height --- */
+.navbar-collapse {
+    max-height: 80vh; 
+    overflow-y: auto; 
+}
 
-    /* --- Responsive Adjustments --- */
-    /* For tablets and mobile phones (screens smaller than 768px) */
-    @media (max-width: 768px) {
-        .main-title {
-            font-size: 2.5rem; /* Reduced font size for smaller screens */
-        }
-        .subtitle {
-            font-size: 0.9rem; /* Smaller subtitle */
-            display: block; /* Make subtitle appear on a new line */
-            margin-left: 0;
-        }
-        .header-title {
-            padding-left: 0;
-        }
-    }
+/* Positions the close button in the top-right corner of the expanded mobile menu */
+#navbarNav {
+    position: relative;
+}
+
+
 </style>
+
