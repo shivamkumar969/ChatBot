@@ -6,9 +6,6 @@
     <title>FAQs</title>
     {% include 'common/mylinks.html' %}
     <style>
-        body {
-            background-color: #fff9f7;
-        }
         .faq-header {
             color: #d9534f; /* Matches text-danger */
             font-weight: 600;
@@ -43,11 +40,11 @@
         }
     </style>
 </head>
-<body>
-    <div class="container-fluid p-0">
+<body class="pt-0">
+    <div class="container-fluid p-0 pt-0">
         {% include 'common/header.html' %}
 
-        <div class="container my-5">
+        <div class="container mt-5 mb-5">
             <div class="row">
                 <div class="col-lg-8 col-md-10 mx-auto">
                     <h1 class="text-center faq-header">Frequently Asked Questions</h1>
@@ -203,7 +200,6 @@
             </div>
         </div>
         {% include 'common/footer.html' %}
-        {% include 'common/chatpopup.html' %}
     </div>
 </body>
 </html>
