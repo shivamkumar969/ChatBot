@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enquiry</title>
     {% include 'common/mylinks.html' %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
     <style>
-        body {
-            background-color: #fff9f7;
-            border: none;
-        }
+        
         .enquiry-card {
             background-color: transparent;
             border: none;
@@ -48,7 +48,7 @@
         }
     </style>
 </head>
-<body>
+<body class="pt-0">
     <div class="container-fluid p-0">
         {% include 'common/header.html' %}
 
@@ -73,26 +73,35 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <select class="form-select" id="estate" name="enstate" aria-label="State select">
-                                        <option selected disabled>Choose Your State</option>
-                                    </select>
+                                    <div class="form-floating">
+                                        <select class="form-select" id="estate" name="enstate" aria-label="State select">
+                                            <option selected disabled>Choose Your State</option>
+                                        </select>
+                                        <label for="estate">State</label>
+                                    </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <select class="form-select" id="ecity" name="encity" aria-label="City select">
-                                        <option selected disabled>Choose Your City</option>
-                                    </select>
+                                    <div class="form-floating">
+                                        <select class="form-select" id="ecity" name="encity" aria-label="City select">
+                                            <option selected disabled>Choose Your City</option>
+                                        </select>
+                                        <label for="ecity">City</label>
+                                    </div>
                                 </div>
                             </div>
-                            <select class="form-select mb-3" id="ecourse" name="encourse" aria-label="Course select">
-                                <option selected disabled>Choose Your Course</option>
-                                <option value="BA (Mass Comm.)">BA (Mass Comm.)</option>
-                                <option value="BBA">BBA</option>
-                                <option value="BCA">BCA</option>
-                                <option value="BCOM(H)">BCOM(H)</option>
-                                <option value="MBA">MBA</option>
-                                <option value="MCA">MCA</option>
-                                <option value="MCOM">MCOM</option>
-                            </select>
+                            <div class="form-floating mb-3">
+                                <select class="form-select" id="ecourse" name="encourse" aria-label="Course select">
+                                    <option selected disabled>Choose Your Course</option>
+                                    <option value="BA (Mass Comm.)">BA (Mass Comm.)</option>
+                                    <option value="BBA">BBA</option>
+                                    <option value="BCA">BCA</option>
+                                    <option value="BCOM(H)">BCOM(H)</option>
+                                    <option value="MBA">MBA</option>
+                                    <option value="MCA">MCA</option>
+                                    <option value="MCOM">MCOM</option>
+                                </select>
+                                <label for="ecourse">Course</label>
+                            </div>
                             <div class="input-group mb-3 captcha-group">
                                 <span class="input-group-text">
                                     <img src="/static/captcha_file/{{captcha_img_name}}" alt="Captcha" id="imgcaptcha" height="40">
@@ -110,12 +119,10 @@
                 </div>
 
                 <div class="col-lg-5 d-flex flex-column ">
-                    <!-- <h3 class="text-center mb-3" style="color: #6c757d;">Find Us Here</h3> -->
                     <div class="shadow-lg map-container flex-grow-1">
-                        <iframe class="map-container" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3608.438761698667!2d82.918039175237!3d25.255821677673264!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398e32d8078a2c2f%3A0xa6813f724988d305!2z4KS44KWN4KSV4KWC4KSyIOCkkeCkq-CkvCDgpK7gpYjgpKjgpYfgpJzgpK7gpYfgpILgpJ8g4KS44KS-4KSH4KSC4KS44KWH4KS4!5e0!3m2!1shi!2sin!4v1753427928334!5m2!1shi!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <iframe class="map-container" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3608.243547222048!2d82.99955231501097!3d25.26233298386561!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398e31005b867c4f%3A0x6f6a4478e58e62d6!2sSchool%20of%20Management%20Sciences%20(SMS)%2C%20Varanasi!5e0!3m2!1sen!2sin!4v1663168181585!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
-
             </div>
         </div>
         
@@ -127,9 +134,7 @@
         {% endif %}
 
         {% include 'common/footer.html' %}
-        {% include 'common/chatpopup.html' %}
     </div>
-
     <script>
     $(document).ready(function() {
         // --- CAPTCHA REFRESH ---
@@ -226,10 +231,10 @@
         const stateSelect = document.getElementById('estate');
         const citySelect = document.getElementById('ecity');
         for (const state in statesAndCities) {
-             const option = document.createElement('option');
-             option.value = state;
-             option.textContent = state;
-             stateSelect.appendChild(option);
+              const option = document.createElement('option');
+              option.value = state;
+              option.textContent = state;
+              stateSelect.appendChild(option);
         }
         stateSelect.addEventListener('change', (event) => {
             const selectedState = event.target.value;
