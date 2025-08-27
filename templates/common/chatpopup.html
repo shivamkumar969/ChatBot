@@ -9,13 +9,26 @@
     }
     
     .chat-widget-container {
-        position: fixed;
+        /* position: fixed;
         bottom: 2rem;
         right: 2rem;
         display: flex;
         flex-direction: column;
         align-items: flex-end;
+        z-index: 1000; */
+        position: fixed;
+        bottom: 2rem;
+        right: .5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
         z-index: 1000;
+        
+        /* NEW: Visibility logic is now on the main container */
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(20px);
+        transition: all 0.3s ease-in-out;
     }
 
     /* --- CHAT WIDGET STYLES (SIMPLIFIED & COMBINED) --- */
@@ -50,6 +63,7 @@
         height: 60px;
         width: 60px;
         border-radius: 50%;
+        mix-blend-mode: screen;
     }
     .chat-header h1 {
         color: white;
@@ -130,13 +144,32 @@
     
     /* --- FLOATING BUTTON --- */
     .chat-button {
+        /* width: 64px;
+        height: 64px;
+        background-color: #007bff;
+        border-radius: 50%;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2); */
+        /* MODIFIED: Hide by default */
+        /* opacity: 0;
+        pointer-events: none;
+        transform: scale(0.9);
+        transition: transform 0.3s ease-in-out; */
         width: 64px;
         height: 64px;
         background-color: #007bff;
         border-radius: 50%;
         box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         transition: transform 0.2s ease-in-out;
+        /* REMOVED: The opacity and transform properties are now controlled by the parent */
+
     }
+    /* NEW: Style for when the button is visible */
+    .chat-button.show {
+        opacity: 1;
+        pointer-events: auto;
+        transform: scale(1);
+    }
+
     .chat-button:hover {
         transform: scale(1.1);
     }
@@ -154,11 +187,11 @@
         font-size: 16px; /* Slightly larger text */
         font-weight: bold; /* Make the text stand out */
         white-space: nowrap;
+
         opacity: 0;
         transform: translateY(15px); /* Slide up slightly */
         transition: all 0.3s ease-in-out;
         pointer-events: none;
-        z-index: 1001; /* Ensure it's above the button */
     }
 
     /* Arrow pointing to the button (MODIFIED) */
@@ -178,9 +211,27 @@
         opacity: 1;
         transform: translateX(0);
     }
+
+    /* NEW: Class to show the entire container */
+    .chat-widget-container.show {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+    .chat-tooltip {
+        opacity: 1;
+        transform: translateY(0); /* This animates it sliding up into place */
+    }
+
+    /* NEW RULE: Hide the tooltip when the chat window is open */
+    #chatWidget.show + #chatTooltip {
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease-in-out;
+    }
 </style>
 
-<div class="chat-widget-container">  
+<div class="chat-widget-container show">  
     <div id="chatWidget" class="chat-widget">
         <div class="chat-header">
             <span class="close-button">&times;</span>
@@ -216,29 +267,44 @@
 </div>
 
 <!-- <script>
-
     $(document).ready(function(){
         // --- Elements ---
+        const chatContainer = $('.chat-widget-container'); 
         const chatWidget = $('#chatWidget');
         const chatButton = $('#chatButton');
         const closeBtn = $('.close-button');
         const sendBtn = $('#btnsend');
         const chatInput = $('#txtchat');
         const chatWindow = $('#dv_chatwindows');
-        const chatTooltip = $('#chatTooltip');
-        
-        // --- Show and Hide Tooltip ---
-        // After a 1-second delay, show the tooltip
-        setTimeout(function() {
-            chatTooltip.addClass('show');
-        }, 1000); 
 
-        // After another 5 seconds, hide it again
-        setTimeout(function() {
-            chatTooltip.removeClass('show');
-        }, 6000); // 1000ms delay + 5000ms visible
+        // --- (NEW) Functions to control the hide/show cycle ---
+        function hideContainer() {
+            chatContainer.removeClass('show');
+            // After hiding, wait 20 seconds then show it again
+            setTimeout(showContainer, 10000); 
+        }
 
-        // --- Toggle Widget Visibility ---
+        function showContainer() {
+            chatContainer.addClass('show');
+            // After showing, wait 5 seconds then hide it again
+            setTimeout(hideContainer, 5000);
+        }
+
+        // --- Start the first cycle ---
+        // The widget is already visible, so we start by waiting 5 seconds before hiding it.
+        setTimeout(hideContainer, 5000);
+
+
+        // --- Code for making the chatbox work ---
+
+        $(document).on('click', function(event) {
+            if (chatWidget.hasClass('show') && 
+                $(event.target).closest('#chatWidget').length === 0 &&
+                $(event.target).closest('#chatButton').length === 0) {
+                chatWidget.removeClass('show');
+            }
+        });
+
         function toggleWidget() {
             chatWidget.toggleClass('show');
         }
@@ -246,16 +312,15 @@
         chatButton.on('click', toggleWidget);
         closeBtn.on('click', () => chatWidget.removeClass('show'));
         
-        // --- Send Message ---
         function sendMessage() {
             var cur_chat = $('#txtchat').val().trim();
             if(cur_chat.length > 0){
                 var chat_window_obj = $('#dv_chatwindows');
                 
                 var user_html = `<div class="message-row user">
-                                    <div class="message-box">${cur_chat}</div>
-                                    <img src="{{url_for('static', filename='images/user.png')}}" class="logo">
-                                    </div>`;
+                                     <div class="message-box">${cur_chat}</div>
+                                     <img src="{{url_for('static', filename='images/user.png')}}" class="logo">
+                                   </div>`;
                 chat_window_obj.append(user_html);
 
                 $("#txtchat").val("");
@@ -265,7 +330,7 @@
                     var bot_html = `<div class="message-row bot">
                                         <img src="{{url_for('static', filename='images/mainlogo.jpg')}}" class="logo">
                                         <div class="message-box">${bot_ans}</div>
-                                    </div>`;
+                                      </div>`;
                     chat_window_obj.append(bot_html);
                     chat_window_obj.scrollTop(chat_window_obj[0].scrollHeight);
                 });
@@ -282,59 +347,73 @@
     });
 </script> -->
 
-
-<script>
+<!-- <script>
     $(document).ready(function(){
         // --- Elements ---
+        const chatContainer = $('.chat-widget-container'); 
         const chatWidget = $('#chatWidget');
         const chatButton = $('#chatButton');
         const closeBtn = $('.close-button');
         const sendBtn = $('#btnsend');
         const chatInput = $('#txtchat');
         const chatWindow = $('#dv_chatwindows');
-        const chatTooltip = $('#chatTooltip');
+
+        // --- (MODIFIED) Timer logic with variables to hold timer IDs ---
+        let hideTimer;
+        let showTimer;
+
+        function hideContainer() {
+            chatContainer.removeClass('show');
+            // After hiding, wait 10 seconds then show it again
+            showTimer = setTimeout(showContainer, 10000); 
+        }
+
+        function showContainer() {
+            chatContainer.addClass('show');
+            // After showing, wait 5 seconds then hide it again
+            hideTimer = setTimeout(hideContainer, 5000);
+        }
+
+        // --- Start the first cycle ---
+        hideTimer = setTimeout(hideContainer, 5000);
+
         
-        // --- Show and Hide Tooltip ---
-        // After a 1-second delay, show the tooltip
-        setTimeout(function() {
-            chatTooltip.addClass('show');
-        }, 1000); 
+        // --- (MODIFIED) Click handler for the main chat button ---
+        chatButton.on('click', function() {
+            // 1. Stop the automatic hide/show cycle completely
+            clearTimeout(hideTimer);
+            clearTimeout(showTimer);
 
-        // After another 5 seconds, hide it again
-        setTimeout(function() {
-            chatTooltip.removeClass('show');
-        }, 6000); // 1000ms delay + 5000ms visible
+            // 2. Make sure the widget container is now permanently visible
+            chatContainer.addClass('show');
 
-        // --- (NEW) Close Widget on Outside Click ---
+            // 3. Open or close the actual chat WINDOW
+            chatWidget.toggleClass('show');
+        });
+
+
+        // --- Code for making the chatbox work ---
+
         $(document).on('click', function(event) {
-            // Check if the widget is open AND if the click was NOT on the widget or the open button
             if (chatWidget.hasClass('show') && 
                 $(event.target).closest('#chatWidget').length === 0 &&
                 $(event.target).closest('#chatButton').length === 0) {
-                
-                // If conditions are met, close the widget
                 chatWidget.removeClass('show');
             }
         });
 
-        // --- Toggle Widget Visibility ---
-        function toggleWidget() {
-            chatWidget.toggleClass('show');
-        }
-
-        chatButton.on('click', toggleWidget);
+        // The close button just closes the inner chat window
         closeBtn.on('click', () => chatWidget.removeClass('show'));
         
-        // --- Send Message ---
         function sendMessage() {
             var cur_chat = $('#txtchat').val().trim();
             if(cur_chat.length > 0){
                 var chat_window_obj = $('#dv_chatwindows');
                 
                 var user_html = `<div class="message-row user">
-                                    <div class="message-box">${cur_chat}</div>
-                                    <img src="{{url_for('static', filename='images/user.png')}}" class="logo">
-                                 </div>`;
+                                     <div class="message-box">${cur_chat}</div>
+                                     <img src="{{url_for('static', filename='images/user.png')}}" class="logo">
+                                   </div>`;
                 chat_window_obj.append(user_html);
 
                 $("#txtchat").val("");
@@ -344,7 +423,211 @@
                     var bot_html = `<div class="message-row bot">
                                         <img src="{{url_for('static', filename='images/mainlogo.jpg')}}" class="logo">
                                         <div class="message-box">${bot_ans}</div>
-                                    </div>`;
+                                      </div>`;
+                    chat_window_obj.append(bot_html);
+                    chat_window_obj.scrollTop(chat_window_obj[0].scrollHeight);
+                });
+            }
+        }
+
+        sendBtn.on('click', sendMessage);
+        chatInput.on('keydown', function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                sendMessage();
+            }
+        });
+    });
+</script> -->
+
+<!-- <script>
+    $(document).ready(function(){
+        // --- Elements ---
+        const chatContainer = $('.chat-widget-container'); 
+        const chatWidget = $('#chatWidget');
+        const chatButton = $('#chatButton');
+        const chatTooltip = $('#chatTooltip');
+        const closeBtn = $('.close-button');
+        const sendBtn = $('#btnsend');
+        const chatInput = $('#txtchat');
+        const chatWindow = $('#dv_chatwindows');
+
+        // --- Timer logic with variables to hold timer IDs ---
+        let hideTimer;
+        let showTimer;
+
+        function hideContainer() {
+            chatContainer.removeClass('show');
+            showTimer = setTimeout(showContainer, 10000); 
+        }
+
+        function showContainer() {
+            chatContainer.addClass('show');
+            hideTimer = setTimeout(hideContainer, 5000);
+        }
+
+        hideTimer = setTimeout(hideContainer, 5000);
+
+        
+        // --- Click handler for the main chat button ---
+        chatButton.on('click', function() {
+            // 1. Stop the automatic hide/show cycle
+            clearTimeout(hideTimer);
+            clearTimeout(showTimer);
+
+            // 2. Make sure the widget container is permanently visible
+            chatContainer.addClass('show');
+
+            // 3. Open or close the actual chat WINDOW
+            chatWidget.toggleClass('show');
+            
+            // 4. Check if the chat window is now open
+            if (chatWidget.hasClass('show')) {
+                // If it's open, hide the tooltip text
+                chatTooltip.removeClass('show');
+            }
+        });
+
+
+        // --- Code for making the chatbox work ---
+
+        $(document).on('click', function(event) {
+            // THE FIX IS IN THE LINE BELOW
+            if (chatWidget.hasClass('show') && 
+                $(event.target).closest('#chatWidget').length === 0 &&
+                $(event.target).closest('#chatButton').length === 0) {
+                chatWidget.removeClass('show');
+            }
+        });
+
+        closeBtn.on('click', () => chatWidget.removeClass('show'));
+        
+        function sendMessage() {
+            var cur_chat = $('#txtchat').val().trim();
+            if(cur_chat.length > 0){
+                var chat_window_obj = $('#dv_chatwindows');
+                
+                var user_html = `<div class="message-row user">
+                                     <div class="message-box">${cur_chat}</div>
+                                     <img src="{{url_for('static', filename='images/user.png')}}" class="logo">
+                                   </div>`;
+                chat_window_obj.append(user_html);
+
+                $("#txtchat").val("");
+                chat_window_obj.scrollTop(chat_window_obj[0].scrollHeight);
+
+                $.getJSON("getbotanswer", { userquery: cur_chat }, function(bot_ans){
+                    var bot_html = `<div class="message-row bot">
+                                        <img src="{{url_for('static', filename='images/mainlogo.jpg')}}" class="logo">
+                                        <div class="message-box">${bot_ans}</div>
+                                      </div>`;
+                    chat_window_obj.append(bot_html);
+                    chat_window_obj.scrollTop(chat_window_obj[0].scrollHeight);
+                });
+            }
+        }
+
+        sendBtn.on('click', sendMessage);
+        chatInput.on('keydown', function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                sendMessage();
+            }
+        });
+    });
+</script> -->
+
+<script>
+    $(document).ready(function(){
+        // --- Elements ---
+        const chatContainer = $('.chat-widget-container'); 
+        const chatWidget = $('#chatWidget');
+        const chatButton = $('#chatButton');
+        const chatTooltip = $('#chatTooltip');
+        const closeBtn = $('.close-button');
+        const sendBtn = $('#btnsend');
+        const chatInput = $('#txtchat');
+        const chatWindow = $('#dv_chatwindows');
+
+        // --- Timer logic ---
+        let hideTimer;
+        let showTimer;
+
+        function hideContainer() {
+            chatContainer.removeClass('show');
+            showTimer = setTimeout(showContainer, 10000); 
+        }
+
+        function showContainer() {
+            chatContainer.addClass('show');
+            hideTimer = setTimeout(hideContainer, 5000);
+        }
+
+        // --- (NEW) Function to reset the widget and restart the cycle ---
+        function resetAndStartCycle() {
+            // 1. Close the chat window
+            chatWidget.removeClass('show');
+            
+            // 2. Stop any existing timers to prevent conflicts
+            clearTimeout(hideTimer);
+            clearTimeout(showTimer);
+
+            // 3. Restart the automatic cycle by calling the first function in the loop
+            hideContainer();
+        }
+
+        // --- Start the first cycle on page load ---
+        hideTimer = setTimeout(hideContainer, 5000);
+
+        
+        // --- Click handler for the main chat button ---
+        chatButton.on('click', function() {
+            clearTimeout(hideTimer);
+            clearTimeout(showTimer);
+            chatContainer.addClass('show');
+            chatWidget.toggleClass('show');
+            
+            if (chatWidget.hasClass('show')) {
+                chatTooltip.removeClass('show');
+            }
+        });
+
+        // --- (MODIFIED) Handlers for closing the chat window ---
+
+        // When clicking outside the widget
+        $(document).on('click', function(event) {
+            if (chatWidget.hasClass('show') && 
+                $(event.target).closest('#chatWidget').length === 0 &&
+                $(event.target).closest('#chatButton').length === 0) {
+                
+                resetAndStartCycle(); // Reset and restart the cycle
+            }
+        });
+
+        // When clicking the 'X' close button
+        closeBtn.on('click', resetAndStartCycle); // Reset and restart the cycle
+        
+
+        // --- Code for sending messages ---
+        function sendMessage() {
+            var cur_chat = $('#txtchat').val().trim();
+            if(cur_chat.length > 0){
+                var chat_window_obj = $('#dv_chatwindows');
+                
+                var user_html = `<div class="message-row user">
+                                     <div class="message-box">${cur_chat}</div>
+                                     <img src="{{url_for('static', filename='images/user.png')}}" class="logo">
+                                   </div>`;
+                chat_window_obj.append(user_html);
+
+                $("#txtchat").val("");
+                chat_window_obj.scrollTop(chat_window_obj[0].scrollHeight);
+
+                $.getJSON("getbotanswer", { userquery: cur_chat }, function(bot_ans){
+                    var bot_html = `<div class="message-row bot">
+                                        <img src="{{url_for('static', filename='images/mainlogo.jpg')}}" class="logo">
+                                        <div class="message-box">${bot_ans}</div>
+                                      </div>`;
                     chat_window_obj.append(bot_html);
                     chat_window_obj.scrollTop(chat_window_obj[0].scrollHeight);
                 });
