@@ -29,23 +29,40 @@ def open_faq():
 def open_feedback():
     return render_template('feedback.html')
 
-@app.route('/submit_feedback',methods=['POST'])
+@app.route('/submit_feedback', methods=['POST'])
 def save_feedback():
-    # read data from form
-    name=request.form.get("fename")
-    email=request.form.get("feemail")
-    gender=request.form.get("fegender")
-    suggestion=request.form.get("fesuggestion")
-    feedback=request.form.get("fefeedback")
-    # creating email message to owner
-    mail_msg="Hii Admin,<br> A person with name <b>"+name+"</b>, has submitted a feedback of your <b> Chat Bot Portal. <br> Details of the Suggestion and Feedback are :- </b><br><br><b> Name:<b/>"+name+"<br><b>Email Id of Person:<b>"+email+"<br><br><b>Gender:</b>"+gender+"<br><b>Suggestion:</b>"+suggestion+"<br><b>Feedback Message is:</b>"+feedback+"<br>From-<br>Chatbot"
-    # Send mail to user
-    send_mail="Hii <b>"+name+"</b><br><br>Your feedback is submitted successfully.<br><br>From-<br><b>Chatbot Team SMS Varanasi</b>"
-    #sending email allert to owner
-    send_my_email(app,"shivamji101202@gmail.com","A new feedback Recived",mail_msg)
-    send_my_email(app,email,"Thanks For Feedback",send_mail)
-    message="Thanks for your valuable feedback. We will get back to you shortly."
-    return render_template("feedback.html",msgg=message)
+    try:
+        name = request.form.get("fename")
+        email = request.form.get("feemail")
+        gender = request.form.get("fegender")
+        suggestion = request.form.get("fesuggestion")
+        feedback = request.form.get("fefeedback")
+
+        mail_msg = f"""
+        Hii Admin,<br>
+        A person with name <b>{name}</b> submitted feedback.<br><br>
+        <b>Name:</b> {name}<br>
+        <b>Email:</b> {email}<br>
+        <b>Gender:</b> {gender}<br>
+        <b>Suggestion:</b> {suggestion}<br>
+        <b>Feedback:</b> {feedback}
+        """
+
+        send_mail = f"""
+        Hii <b>{name}</b><br>
+        Your feedback is submitted successfully.<br>
+        """
+
+        # send emails
+        send_my_email(app, "shivamji101202@gmail.com", "New Feedback", mail_msg)
+        send_my_email(app, email, "Thanks For Feedback", send_mail)
+
+        message = "Thanks for your valuable feedback."
+
+        return render_template("feedback.html", msgg=message)
+
+    except Exception as e:
+        return f"Error occurred: {str(e)}"
 
 @app.route('/chatanalytics')
 def open_chatanalytics():
