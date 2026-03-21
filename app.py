@@ -1,3 +1,5 @@
+import os
+from flask_mail import Mail
 from flask import Flask, render_template, request,jsonify,session
 from MailSender import send_my_email
 from Knowledgebase import search_knowledge
@@ -7,8 +9,19 @@ from savedata import saved_enquiry
 from savemessage import saved_message
 
 app = Flask(__name__)
+mail = Mail()
 UPLOAD_FOLDER='static'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'shivamji101202@gmail.com'
+app.config['MAIL_PASSWORD'] = 'vezp ahya xxpo trgo'   # app password
+app.config['MAIL_DEFAULT_SENDER'] = 'shivamji101202@gmail.com'
+
+mail.init_app(app)
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -54,8 +67,9 @@ def save_feedback():
         """
 
         # send emails
-        send_my_email(app, "shivamji101202@gmail.com", "New Feedback", mail_msg)
-        send_my_email(app, email, "Thanks For Feedback", send_mail)
+        # send_my_email(app, "shivamji101202@gmail.com", "New Feedback", mail_msg)
+        send_my_email(mail, "shivamji101202@gmail.com", "New Feedback", mail_msg)
+        send_my_email(mail, email, "Thanks For Feedback", send_mail)
 
         message = "Thanks for your valuable feedback."
 
@@ -114,8 +128,8 @@ def save_enquery():
         send_msg="Hii "+name+",<br><b>Your enquiry is submitted successfully.</b><br>At College Enquiry Portal. <br> Your Details are :- </b><br><br><b> Name:<b/>"+name+"<br><b>Email Id:<b>"+email+"<br><b>Mobile Number:</b>"+mobile+"<br><b>Course:</b>"+course+"<br><b>State:</b>"+state+"<br><b>City:</b>"+city+"<br><br>From-<b>SMS Varanasi</b>"
 
         #sending email allert to owner
-        send_my_email(app,"shivamji101202@gmail.com","A new Enquiry Recived",recive_msg)
-        send_my_email(app,email,"Your Enquiry is submitted successfully.",send_msg)
+        send_my_email(mail,"shivamji101202@gmail.com","A new Enquiry Recived",recive_msg)
+        send_my_email(mail,email,"Your Enquiry is submitted successfully.",send_msg)
         msg="Thanks your enquiry is submitted."
     else:
         msg="Invalid Captcha code. Please try again."
@@ -151,7 +165,7 @@ def call_testajax():
 # Test Email sending
 @app.route('/send')
 def mail_test():
-    r=send_my_email(app,"shivamkumar101202@gmail.com","Test Message","Hello, How are You?")
+    r=send_my_email(mail,"shivamkumar101202@gmail.com","Test Message","Hello, How are You?")
     if r:
         return "Email send sucessfully."
     else:
@@ -178,8 +192,8 @@ def save_message():
     send_msg="Hii "+name+",<br><b>Your message is submitted successfully.</b><br>Your Details are :- </b><br><br><b> Name: </b>"+name+"<br><b>Email Id: <b>"+email+"<br><b>Your message:</b><br>"+message+"<br><br>From-<b>SHIVAM KUMAR</b>"
 
     #sending email allert to owner
-    send_my_email(app,"shivamji101202@gmail.com","A new Enquiry Recived",recive_msg)
-    send_my_email(app,email,"Your Message is submitted successfully.",send_msg)
+    send_my_email(mail,"shivamji101202@gmail.com","A new Enquiry Recived",recive_msg)
+    send_my_email(mail,email,"Your Message is submitted successfully.",send_msg)
     msg="Thanks your message is submitted."
     return render_template("developer.html",msg=msg)
 
